@@ -1,0 +1,993 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Rekber Resmi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Tata letak: bingkai ponsel di tengah dengan panel Kontrol Demo di samping; Dasbor Pantauan memakai panel lebar; di ponsel asli aplikasi tampil selebar layar. */
+:root{
+  --bg:#EAF0F7;--app:#F3F6FB;--surface:#FFFFFF;--surface-2:#F0F4F9;--ink:#0B1F3A;--ink-2:#44546B;--ink-3:#6B7B91;--line:#DAE3EE;
+  --navy:#0B2A55;--on-navy:#FFFFFF;--teal:#14A896;--teal-btn:#0B7F72;--on-teal:#FFFFFF;--teal-ink:#08665B;--teal-soft:#DAF3EF;
+  --accent:#F4A53C;--accent-ink:#7A4A00;--accent-soft:#FFEFD4;--good:#0C7A53;--good-soft:#DBF4E8;--bad:#B93426;--bad-soft:#FCE8E5;
+  --info:#1D4F9E;--info-soft:#E3ECFA;--hero-1:#0B2A55;--hero-2:#0A6B6C;--frame:#0B1F3A;
+  --shadow:0 1px 2px rgba(11,31,58,.05),0 10px 28px rgba(11,31,58,.08);
+  --font:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08111F;--app:#0C1626;--surface:#13203A;--surface-2:#1A2A47;--ink:#E8EEF8;--ink-2:#A9B7CC;--ink-3:#8190A8;--line:#26385A;--navy:#2F5FB8;--on-navy:#FFFFFF;--teal:#2EC4B0;--teal-btn:#16A596;--on-teal:#04201C;--teal-ink:#5FE0CF;--teal-soft:#0F3A3A;--accent:#F4A53C;--accent-ink:#FFC978;--accent-soft:#3A2A10;--good:#4FD8A0;--good-soft:#0F3A2C;--bad:#FF8F82;--bad-soft:#3F1B18;--info:#8DB4F5;--info-soft:#142C52;--hero-1:#14336A;--hero-2:#0B5A5C;--frame:#02060D;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#08111F;--app:#0C1626;--surface:#13203A;--surface-2:#1A2A47;--ink:#E8EEF8;--ink-2:#A9B7CC;--ink-3:#8190A8;--line:#26385A;--navy:#2F5FB8;--on-navy:#FFFFFF;--teal:#2EC4B0;--teal-btn:#16A596;--on-teal:#04201C;--teal-ink:#5FE0CF;--teal-soft:#0F3A3A;--accent:#F4A53C;--accent-ink:#FFC978;--accent-soft:#3A2A10;--good:#4FD8A0;--good-soft:#0F3A2C;--bad:#FF8F82;--bad-soft:#3F1B18;--info:#8DB4F5;--info-soft:#142C52;--hero-1:#14336A;--hero-2:#0B5A5C;--frame:#02060D;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.5;min-height:100vh;
+  padding-block:12px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+h1,h2,h3,p,ul,ol{margin:0}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+ul,ol{padding:0;list-style:none}
+a{color:var(--info);font-weight:600}
+.stage{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16px;letter-spacing:-.01em}
+.brand small{display:block;font-weight:500;font-size:11px;color:var(--ink-3);letter-spacing:0}
+.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--hero-1),var(--teal-btn));color:#fff;display:grid;place-items:center;flex:none}
+.roles{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px;max-width:100%;overflow-x:auto}
+.roles button{min-height:44px;padding:0 12px;border:0;background:none;border-radius:12px;display:flex;align-items:center;gap:7px;font-weight:700;font-size:13px;color:var(--ink-2);cursor:pointer;white-space:nowrap;position:relative;transition:background .15s,color .15s}
+.roles button:hover{background:var(--surface-2)}
+.roles button[aria-pressed="true"]{background:var(--navy);color:var(--on-navy)}
+.roles .dot{position:absolute;top:6px;right:6px;min-width:16px;height:16px;border-radius:9px;background:var(--accent);color:#2B1A00;font-size:10px;font-weight:800;display:grid;place-items:center;padding:0 4px}
+.layout{display:grid;grid-template-columns:392px minmax(0,1fr);gap:28px;align-items:start}
+.layout[data-mode="wide"]{grid-template-columns:minmax(0,1fr) 320px}
+.layout[data-mode="wide"] .phone{display:none}
+.layout[data-mode="phone"] .wide{display:none}
+.wide{min-width:0;display:flex;flex-direction:column;gap:14px}
+.phone{position:relative;width:392px;max-width:100%;height:min(820px,calc(100dvh - 130px));min-height:660px;background:var(--app);border:10px solid var(--frame);border-radius:46px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(11,31,58,.22)}
+.statusbar{height:30px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:12px;font-weight:700;color:var(--ink-2)}
+.statusbar i{display:flex;gap:5px;align-items:center;font-style:normal}
+.appbar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 16px 10px;gap:8px}
+.appbar .brand{font-size:15px}
+.appbar .logo{width:30px;height:30px;border-radius:10px}
+.daychip{font-size:11px;font-weight:700;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:5px 10px;white-space:nowrap}
+#screen{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
+#screen.enter>*{animation:enter .26s ease both}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tabbar{flex:none;display:flex;background:var(--surface);border-top:1px solid var(--line);padding:6px 6px 8px}
+.tabbar button{flex:1;min-height:48px;border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:700;color:var(--ink-3);cursor:pointer;border-radius:12px;position:relative}
+.tabbar button[aria-current="page"]{color:var(--teal-ink)}
+.tabbar button[aria-current="page"]::before{content:"";position:absolute;top:0;width:22px;height:3px;border-radius:3px;background:var(--teal-btn)}
+.tabbar .dot{position:absolute;top:4px;left:calc(50% + 8px);min-width:16px;height:16px;border-radius:9px;background:var(--accent);color:#2B1A00;font-size:10px;font-weight:800;display:grid;place-items:center;padding:0 4px}
+.foot{text-align:center;font-size:12px;color:var(--ink-3);padding:4px 0}
+.fab{display:none}
+@media (max-width:899px){
+  .layout,.layout[data-mode="wide"]{grid-template-columns:minmax(0,1fr);gap:16px}
+  .phone{width:100%;height:auto;min-height:calc(100dvh - 150px);border:1px solid var(--line);border-radius:24px;overflow:visible}
+  .statusbar{display:none}
+  #screen{overflow:visible}
+  .tabbar{position:sticky;bottom:0;border-radius:0 0 24px 24px;z-index:5}
+  .demo{display:none;position:fixed;left:0;right:0;bottom:0;max-height:82dvh;overflow-y:auto;z-index:40;border-radius:24px 24px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+  .demo.open{display:flex}
+  .fab{display:flex;position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;min-height:48px;padding:0 16px;border-radius:99px;border:0;background:var(--accent);color:#2B1A00;font-weight:800;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer}
+  .scrim{position:fixed;inset:0;background:rgba(3,10,20,.5);z-index:35}
+}
+</style>
+<style>
+.ic{flex:none;display:block}
+.pad{padding:6px 16px 28px;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.flat{box-shadow:none;background:var(--surface-2)}
+.card h2{font-size:15px;font-weight:800;letter-spacing:-.01em}
+.card h3{font-size:13px;font-weight:800}
+.mut{color:var(--ink-2);font-size:13px}
+.tiny{font-size:12px;color:var(--ink-3)}
+.row{display:flex;align-items:center;gap:10px;min-width:0}
+.row.sp{justify-content:space-between}
+.grow{flex:1;min-width:0}
+.stack{display:flex;flex-direction:column;gap:8px}
+.num{font-variant-numeric:tabular-nums}
+.big{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.btn{min-height:46px;padding:0 18px;border-radius:14px;border:1px solid transparent;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;text-align:center;transition:transform .12s,filter .15s,box-shadow .15s,opacity .15s}
+.btn.primary{background:var(--navy);color:var(--on-navy)}
+.btn.teal{background:var(--teal-btn);color:var(--on-teal)}
+.btn.accent{background:var(--accent);color:#2B1A00}
+.btn.ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn.danger{background:var(--bad-soft);color:var(--bad)}
+.btn.sm{min-height:44px;padding:0 14px;font-size:13px}
+.btn.block{width:100%}
+.btn:hover:not(:disabled){filter:brightness(1.07);box-shadow:0 4px 14px rgba(11,31,58,.16)}
+.btn:active:not(:disabled){transform:translateY(1px) scale(.985)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.lbl{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+.inp{width:100%;min-height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);padding:10px 12px;color:var(--ink)}
+textarea.inp{min-height:88px;resize:vertical}
+.inp:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.inp.bad{border-color:var(--bad)}
+.err{color:var(--bad);font-size:12px;font-weight:600;min-height:0;margin-top:4px}
+.err:empty{display:none}
+.row-in{display:flex;gap:8px}
+.icbtn{width:46px;min-width:46px;height:46px;border-radius:12px;border:0;background:rgba(255,255,255,.16);color:#fff;display:grid;place-items:center;cursor:pointer}
+.icbtn:hover{background:rgba(255,255,255,.26)}
+.hero{border-radius:24px;padding:18px;color:#fff;background:linear-gradient(145deg,var(--hero-1),var(--hero-2));display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero::after{content:"";position:absolute;right:-46px;top:-46px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.2),transparent 70%);pointer-events:none}
+.hero h1{font-size:23px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.hero p{opacity:.9;font-size:13px}
+.hero .inp{background:#fff;color:#0B1F3A;border-color:transparent}
+.hero .err{color:#FFD2CB}
+.hero .chips{color:#fff}
+.rrb{display:inline-flex;align-items:center;gap:5px;background:var(--teal-soft);color:var(--teal-ink);font-weight:800;font-size:12px;padding:5px 11px 5px 8px;border-radius:99px;white-space:nowrap;width:fit-content}
+.rrb.sm{font-size:11px;padding:3px 9px 3px 6px}
+.hero .rrb{background:rgba(255,255,255,.18);color:#fff}
+.vb{width:16px;height:16px;border-radius:50%;background:var(--teal-btn);color:var(--on-teal);display:inline-grid;place-items:center;vertical-align:-3px;margin-left:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px}
+.chip{min-height:36px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:12px;font-weight:600;cursor:pointer}
+.hero .chip{background:rgba(255,255,255,.14);border-color:transparent;color:#fff}
+.chip:hover{filter:brightness(1.08)}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.tag.good{background:var(--good-soft);color:var(--good)}
+.tag.bad{background:var(--bad-soft);color:var(--bad)}
+.tag.warn{background:var(--accent-soft);color:var(--accent-ink)}
+.tag.info{background:var(--info-soft);color:var(--info)}
+.res{display:flex;gap:10px;border-radius:14px;padding:12px;align-items:flex-start;animation:enter .25s ease both}
+.res b{display:block;font-size:14px}.res span{font-size:12px}
+.res.ok{background:var(--good-soft);color:var(--good)}
+.res.no{background:var(--bad-soft);color:var(--bad)}
+.res.warn{background:var(--accent-soft);color:var(--accent-ink)}
+.res.info{background:var(--info-soft);color:var(--info)}
+.res span{color:var(--ink-2)}
+.steps{display:flex;flex-direction:column;gap:10px;counter-reset:s}
+.steps li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2)}
+.steps li::before{counter-increment:s;content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;background:var(--teal-soft);color:var(--teal-ink);font-weight:800;font-size:12px;display:grid;place-items:center}
+.rules li{display:flex;gap:10px;font-size:13px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.rules li:first-child{border-top:0;padding-top:0}
+.rules .ico{width:32px;height:32px;border-radius:10px;background:var(--teal-soft);color:var(--teal-ink);display:grid;place-items:center;flex:none}
+.rules b{display:block;font-size:13px}
+.pr{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--ink-2)}
+.pr b{color:var(--ink)}
+.pr.tot{border-top:1px dashed var(--line);padding-top:10px;font-size:15px;font-weight:800;color:var(--ink)}
+.art{border-radius:20px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+.art svg{width:100%;height:100%;display:block}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:13px;cursor:pointer;min-height:44px;padding:6px 0}
+.chk input{width:22px;height:22px;flex:none;accent-color:var(--teal-btn);margin-top:1px}
+.ai{border:1px solid var(--line);border-radius:18px;padding:14px;background:linear-gradient(160deg,var(--info-soft),var(--surface));display:flex;flex-direction:column;gap:8px}
+.ai .hd{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;color:var(--info)}
+.ai ul{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--ink-2)}
+.ai li{display:flex;gap:8px}.ai li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--info);margin-top:7px}
+.stepper{display:flex;align-items:flex-start;padding:4px 0}
+.st{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:11px;font-weight:700;color:var(--ink-3);position:relative}
+.st .nd{width:34px;height:34px;border-radius:50%;background:var(--surface-2);border:2px solid var(--line);display:grid;place-items:center;position:relative;z-index:1;color:var(--ink-3)}
+.st::before{content:"";position:absolute;top:16px;right:50%;width:100%;height:3px;background:var(--line)}
+.st:first-child::before{display:none}
+.st.done .nd{background:var(--teal-btn);border-color:var(--teal-btn);color:var(--on-teal)}
+.st.done::before,.st.cur::before{background:var(--teal-btn)}
+.st.cur .nd{border-color:var(--teal-btn);color:var(--teal-ink);background:var(--teal-soft);box-shadow:0 0 0 5px var(--teal-soft)}
+.st.done,.st.cur{color:var(--ink)}
+.st.pop .nd{animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
+.ring{position:relative;width:64px;height:64px;flex:none}
+.ring svg{width:64px;height:64px;transform:rotate(-90deg)}
+.ring .tx{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:18px;line-height:1;text-align:center}
+.ring .tx small{display:block;font-size:9px;font-weight:700;color:var(--ink-3)}
+.tl{display:flex;flex-direction:column}
+.tl li{display:flex;gap:12px;padding-bottom:14px;position:relative}
+.tl li::before{content:"";position:absolute;left:8px;top:18px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child{padding-bottom:0}.tl li:last-child::before{display:none}
+.tl .pt{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:var(--surface);flex:none;margin-top:2px;display:grid;place-items:center;color:var(--on-teal)}
+.tl li.done .pt{background:var(--teal-btn);border-color:var(--teal-btn)}
+.tl li.warn .pt{background:var(--accent);border-color:var(--accent);color:#2B1A00}
+.tl b{font-size:13px;display:block}.tl small{font-size:11px;color:var(--ink-3)}
+.tl li.todo b{color:var(--ink-3)}
+.ev li{display:flex;gap:8px;font-size:12px;color:var(--ink-2);padding:7px 0;border-top:1px solid var(--line)}
+.ev li:first-child{border-top:0}
+.ev time{flex:none;width:58px;font-size:11px;color:var(--ink-3);font-weight:600}
+.opt{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;min-height:48px;background:var(--surface);width:100%;text-align:left;font-weight:600}
+.opt[aria-checked="true"]{border-color:var(--teal-btn);background:var(--teal-soft);color:var(--teal-ink)}
+.opt .rd{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.opt[aria-checked="true"] .rd{border-color:var(--teal-btn)}
+.opt[aria-checked="true"] .rd::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal-btn)}
+.opt small{display:block;font-weight:500;color:var(--ink-2);font-size:12px}
+.files li{display:flex;align-items:center;gap:8px;font-size:12px;background:var(--surface-2);border-radius:10px;padding:6px 6px 6px 10px;min-height:44px}
+.files li span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files .x{width:44px;height:36px;border:0;background:none;color:var(--ink-3);cursor:pointer;display:grid;place-items:center;border-radius:8px}
+.qrbox{background:#fff;color:#0B1F3A;border-radius:18px;padding:14px;width:210px;margin:0 auto;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.qr{width:100%;display:block}
+.qrbox::after{content:"";position:absolute;left:0;right:0;height:36px;top:-36px;background:linear-gradient(180deg,transparent,rgba(20,168,150,.35),transparent);animation:scan 2.2s linear infinite}
+@keyframes scan{to{top:100%}}
+.spin{width:36px;height:36px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--teal-btn);animation:rot .8s linear infinite;margin:0 auto}
+@keyframes rot{to{transform:rotate(360deg)}}
+.okmark{width:76px;height:76px;border-radius:50%;background:var(--good-soft);color:var(--good);display:grid;place-items:center;margin:0 auto;animation:pop .6s cubic-bezier(.2,1.4,.4,1)}
+.center{text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center}
+.empty{text-align:center;padding:28px 12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.empty .eb{width:60px;height:60px;border-radius:20px;background:var(--surface-2);display:grid;place-items:center;color:var(--ink-3)}
+.sk{border-radius:14px;background:linear-gradient(90deg,var(--surface-2) 25%,var(--line) 37%,var(--surface-2) 63%);background-size:400% 100%;animation:sh 1.2s ease infinite}
+@keyframes sh{0%{background-position:100% 50%}100%{background-position:0 50%}}
+.stars{display:flex;gap:2px;justify-content:center}
+.stars button{width:44px;height:44px;border:0;background:none;color:var(--line);cursor:pointer;display:grid;place-items:center}
+.stars button.on{color:var(--accent)}
+.stars button.on svg{fill:currentColor}
+.seg{display:flex;background:var(--surface-2);border-radius:12px;padding:3px;gap:3px}
+.seg button{flex:1;min-height:44px;border:0;background:none;border-radius:10px;font-weight:700;font-size:13px;color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.bal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bal .card{padding:14px;gap:4px}
+.bal b{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.ev2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ev2 .card{padding:12px;gap:8px}
+.ev2 h3{display:flex;gap:6px;align-items:center}
+.sug{border-radius:14px;padding:12px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:6px;background:var(--info);transition:width .5s}
+.decide{display:flex;flex-direction:column;gap:8px}
+.q{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;cursor:pointer;box-shadow:var(--shadow)}
+.q:hover{border-color:var(--teal)}
+.toast{position:absolute;left:16px;right:16px;bottom:78px;z-index:60;background:var(--ink);color:var(--surface);border-radius:14px;padding:12px 14px;font-size:13px;font-weight:600;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s;display:flex;gap:8px;align-items:center}
+.toast.show{opacity:1;transform:none}
+.toast.good{background:var(--good);color:#fff}
+.toast.warn{background:var(--accent);color:#2B1A00}
+.toast.info{background:var(--info);color:#fff}
+.modal{position:absolute;inset:0;z-index:70;background:rgba(3,10,20,.55);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s}
+.modal[hidden]{display:none}
+@keyframes fade{from{opacity:0}}
+.sheet{background:var(--surface);width:100%;border-radius:24px 24px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;animation:up .25s ease;max-height:92%;overflow-y:auto}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sheet h3{font-size:17px;font-weight:800}
+.mrow{display:flex;gap:8px}.mrow .btn{flex:1}
+.scan{position:absolute;inset:0;z-index:65;background:#06101D;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.scan .fr{width:200px;height:200px;border-radius:24px;border:3px solid var(--teal);position:relative;overflow:hidden}
+.scan .fr::after{content:"";position:absolute;left:0;right:0;height:3px;background:var(--teal);box-shadow:0 0 18px var(--teal);animation:ln 1.4s ease-in-out infinite alternate}
+@keyframes ln{from{top:6%}to{top:94%}}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow);min-width:0}
+.demo h2{font-size:16px;font-weight:800;display:flex;gap:8px;align-items:center}
+.demo h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-3);font-weight:800}
+.scn{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.scn button{border:1.5px solid var(--line);border-radius:14px;background:var(--surface);padding:10px;text-align:left;cursor:pointer;min-height:64px;display:flex;flex-direction:column;gap:2px}
+.scn button b{font-size:13px}.scn button small{font-size:11px;color:var(--ink-2);line-height:1.35}
+.scn button[aria-pressed="true"]{border-color:var(--teal-btn);background:var(--teal-soft)}
+.adv{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.clock{background:var(--surface-2);border-radius:14px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.clock b{font-size:15px}
+.hint{font-size:12px;color:var(--ink-2);background:var(--accent-soft);border-radius:12px;padding:10px 12px}
+.tour{position:fixed;inset:0;z-index:100}
+.tour .tip{position:absolute;width:min(300px,calc(100vw - 32px));background:var(--surface);color:var(--ink);border-radius:18px;padding:16px;box-shadow:0 18px 50px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:8px;animation:enter .25s ease}
+.tour .tip h3{font-size:15px;font-weight:800}
+.tour .tip p{font-size:13px;color:var(--ink-2)}
+.tour .dots{display:flex;gap:4px}.tour .dots i{width:6px;height:6px;border-radius:50%;background:var(--line)}.tour .dots i.on{background:var(--teal-btn);width:16px;border-radius:4px}
+.tour-hl{outline:3px solid var(--accent)!important;outline-offset:3px;border-radius:16px;position:relative;z-index:101}
+.mon{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.mon .span2{grid-column:1/-1}
+.mon .card{gap:10px}
+.mon .hd{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.mon .val{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.mon .cap{font-size:12px;color:var(--ink-2)}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.ch-t{font-size:10px;fill:var(--ink-3);font-family:var(--font)}
+.ch-g{stroke:var(--line);stroke-width:1}
+.ch-l{fill:none;stroke:var(--teal-btn);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.ch-a{fill:var(--teal-soft)}
+.ch-b{fill:var(--info)}.ch-b2{fill:var(--teal-btn)}.ch-b3{fill:var(--accent)}.ch-b4{fill:var(--line)}
+.ch-e{fill:var(--surface);stroke:var(--teal-btn);stroke-width:2.5}
+.ch-r{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:4 3}
+.road{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.road .card{gap:8px}
+.road .ph{font-size:11px;font-weight:800;color:var(--teal-ink);text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:699px){.mon,.road{grid-template-columns:minmax(0,1fr)}.ev2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:899px){.toast{position:fixed;bottom:calc(150px + env(safe-area-inset-bottom,0px));left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px))}.modal,.scan{position:fixed}.scan{z-index:90}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<style>
+.toast{position:fixed;left:50%;right:auto;bottom:calc(24px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 32px));transform:translate(-50%,12px);z-index:120}
+.toast.show{transform:translate(-50%,0)}
+@media (max-width:899px){.toast{left:50%;right:auto;bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+ .demo{display:none;position:fixed;left:0;right:0;bottom:0;max-height:82dvh;overflow-y:auto;z-index:40;border-radius:24px 24px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+ .demo.open{display:flex}
+ .topbar{align-items:flex-start}
+ .roles{width:100%}.roles button{flex:1;justify-content:center;padding:0 8px}
+ .appbar{padding-top:12px}
+ .pad{padding-bottom:96px}
+ .mon .card,.road .card{min-width:0}
+}
+@media (max-width:420px){.roles button{font-size:12px;gap:4px;padding:0 4px}.roles button svg{display:none}.hero h1{font-size:21px}.big{font-size:24px}.bal b{font-size:15px}}
+</style>
+<div class="stage">
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span>Rekber Resmi<small>Prototipe konsep · rekening bersama berizin</small></span>
+    </div>
+    <nav class="roles" id="roles" aria-label="Pilih peran"></nav>
+  </header>
+  <main class="layout" id="layout" data-mode="phone">
+    <section class="phone" id="phone" aria-label="Aplikasi Rekber Resmi">
+      <div class="statusbar" aria-hidden="true"><span>09:41</span><i><svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="4.4" y="5.5" width="3" height="6.5" rx="1"/><rect x="8.8" y="3" width="3" height="9" rx="1"/><rect x="13.2" y="0" width="2.8" height="12" rx="1"/></svg><svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="currentColor"><rect x=".5" y=".5" width="20" height="11" rx="3"/><rect x="2.5" y="2.5" width="14" height="7" rx="1.5" fill="currentColor" stroke="none"/><path d="M22.5 4v4" stroke-linecap="round"/></svg></i></div>
+      <div class="appbar" id="appbar"></div>
+      <div id="screen" tabindex="-1"></div>
+      <nav class="tabbar" id="tabbar" aria-label="Menu aplikasi"></nav>
+      <div class="modal" id="modal" hidden></div>
+      <div id="scanlayer"></div>
+    </section>
+    <section class="wide" id="wide" aria-label="Dasbor Pantauan"></section>
+    <aside class="demo" id="demo" aria-label="Kontrol Demo"></aside>
+  </main>
+  <footer class="foot">Prototipe konsep – bukan layanan resmi Bank Indonesia. Semua nama, penyedia, dan data bersifat fiktif.</footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="scrim" hidden></div>
+<button class="fab" id="fab" type="button" aria-label="Buka Kontrol Demo" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 6h14M5 12h14M5 18h14"/><circle cx="9" cy="6" r="2" fill="var(--accent)"/><circle cx="15" cy="12" r="2" fill="var(--accent)"/><circle cx="8" cy="18" r="2" fill="var(--accent)"/></svg>Kontrol Demo</button>
+<div class="tour" id="tour" hidden></div>
+<script>
+(function(){
+'use strict';
+/* ===== Utilitas ===== */
+const $=(s,r)=>(r||document).querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rp=n=>'Rp'+Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const DN=['Min','Sen','Sel','Rab','Kam','Jum','Sab'],MN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+const wdate=d=>{const x=new Date(2026,10,23);x.setDate(x.getDate()+Math.floor(d/5)*7+d%5);return x;};
+const fday=d=>{const x=wdate(d);return DN[x.getDay()]+', '+x.getDate()+' '+MN[x.getMonth()]+' '+x.getFullYear();};
+const fshort=d=>{const x=wdate(d);return DN[x.getDay()]+', '+x.getDate()+' '+MN[x.getMonth()];};
+const mmss=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const I={
+ shield:'<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/>',
+ check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ truck:'<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
+ box:'<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>',
+ scan:'<path d="M4 8V5a1 1 0 011-1h3M16 4h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M4 12h16"/>',
+ search:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+ wallet:'<path d="M4 7a2 2 0 012-2h11v4"/><path d="M4 7v10a2 2 0 002 2h13a1 1 0 001-1V9a1 1 0 00-1-1H6a2 2 0 01-2-1z"/><circle cx="16" cy="13.5" r="1.2"/>',
+ alert:'<path d="M12 4l9 16H3L12 4z"/><path d="M12 10v4M12 17.2v.1"/>',
+ upload:'<path d="M12 16V5M7.5 9.5L12 5l4.5 4.5M5 19h14"/>',
+ copy:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/>',
+ link:'<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/>',
+ scale:'<path d="M12 4v16M6 20h12M5 7h14"/><path d="M5 7l-3 7a3 3 0 006 0L5 7zM19 7l-3 7a3 3 0 006 0l-3-7z"/>',
+ chart:'<path d="M4 20V4M4 20h16"/><path d="M8 15l4-4 3 3 5-6"/>',
+ home:'<path d="M4 11l8-7 8 7v8a1 1 0 01-1 1h-4v-6h-6v6H5a1 1 0 01-1-1v-8z"/>',
+ list:'<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.1"/>',
+ x:'<path d="M6 6l12 12M18 6L6 18"/>',
+ back:'<path d="M15 5l-7 7 7 7"/>',
+ chev:'<path d="M9 5l7 7-7 7"/>',
+ qr:'<rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h2v2h-2zM18 14h2v2M14 18h2M18 18h2v2"/>',
+ bank:'<path d="M3 9l9-5 9 5M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 20h18"/>',
+ flag:'<path d="M5 21V4M5 5h12l-2 4 2 4H5"/>',
+ star:'<path d="M12 4l2.5 5.2 5.7.8-4.1 4 1 5.6L12 17l-5.1 2.6 1-5.6-4.1-4 5.7-.8L12 4z"/>',
+ spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8L18 16z"/>',
+ lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+ store:'<path d="M4 9l1.5-5h13L20 9M4 9v10h16V9M4 9a2.7 2.7 0 005.3 0 2.7 2.7 0 005.4 0A2.7 2.7 0 0020 9M10 19v-5h4v5"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>',
+ file:'<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/>',
+ image:'<rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M5 18l5-5 3 3 3-3 3 3"/>',
+ refresh:'<path d="M20 11a8 8 0 00-14-4L4 9M4 4v5h5M4 13a8 8 0 0014 4l2-2M20 20v-5h-5"/>',
+ coin:'<circle cx="12" cy="12" r="9"/><path d="M9 10c0-1.5 1.3-2 3-2s3 .6 3 2-1.3 1.6-3 2-3 .6-3 2 1.3 2 3 2 3-.5 3-2"/>',
+ play:'<path d="M8 5l11 7-11 7z"/>',
+ tag:'<path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.2"/>'
+};
+const ic=(n,s)=>'<svg class="ic" width="'+(s||20)+'" height="'+(s||20)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(I[n]||'')+'</svg>';
+const rr=sm=>'<span class="rrb'+(sm?' sm':'')+'">'+ic('shield',sm?13:15)+'Rekber Resmi</span>';
+const vb=()=>'<span class="vb" title="Terverifikasi">'+ic('check',11)+'</span>';
+
+/* ===== Data fiktif ===== */
+const MAX_PRICE=1000000;
+const SELLER={name:'Toko Kriya Nusantara',trx:212,rating:98,since:2022,city:'Yogyakarta'};
+const PROVIDERS=[{n:'Rekber Nusantara Pay',no:'PJP-RK/2027/014'},{n:'Garuda Escrow Indonesia',no:'PJP-RK/2027/022'},{n:'Bumi Dana Aman',no:'PJP-RK/2027/031'},{n:'Sentra Titipan Digital',no:'PJP-RK/2027/047'}];
+const MARKET={'tas':380000,'sepatu':400000,'jam':350000,'kaos':120000,'jaket':250000,'earphone':450000,'headphone':600000,'power bank':220000,'batik':260000,'kopi':90000};
+const SEED_INV={
+ 'RKB-7Q4M-2D9':{code:'RKB-7Q4M-2D9',item:'Tas Anyaman Pandan Sarang',price:385000,art:'bag',note:'Ukuran 32×24 cm, berlapis kain katun. Stok terakhir.'},
+ 'RKB-K3L8-X0P':{code:'RKB-K3L8-X0P',item:'Earphone Nirkabel Seri Nada',price:129000,art:'ear',note:'Baru segel, garansi toko 7 hari.'},
+ 'RKB-BESAR-1':{code:'RKB-BESAR-1',item:'Mesin Espresso Rumahan',price:2500000,art:'box',note:'Tekanan 15 bar, lengkap dengan portafilter.'}
+};
+const HIST0=[{item:'Dompet Kulit Lasem',amt:210000,date:'Jum, 13 Nov 2026'},{item:'Kain Tenun Ikat 2 m',amt:340000,date:'Kam, 12 Nov 2026'},{item:'Gelang Perak Kotagede',amt:175000,date:'Rab, 11 Nov 2026'}];
+const BASE_RELEASED=2450000;
+const REASONS=['Barang tidak sampai','Barang rusak','Tidak sesuai deskripsi','Jumlah kurang','Lainnya'];
+const SCN={A:['Lancar','Penjual kirim, Anda konfirmasi'],B:['Penjual tidak mengirim','Dana kembali setelah 3 hari kerja'],C:['Pembeli tidak merespons','Dana cair otomatis setelah 3 hari kerja'],D:['Sengketa','Mediator memutuskan dalam 7 hari kerja']};
+const OUT={
+ buyer_confirm:{title:'Dana dicairkan ke penjual',sub:'Anda mengonfirmasi bahwa barang sudah sampai.',to:'seller'},
+ auto_release:{title:'Dana cair otomatis ke penjual',sub:'Tidak ada respons 3 hari kerja setelah resi menunjukkan barang diterima.',to:'seller'},
+ refund_noship:{title:'Dana dikembalikan ke pembeli',sub:'Penjual tidak mengirim barang dalam 3 hari kerja.',to:'buyer'},
+ refund_resi:{title:'Dana dikembalikan ke pembeli',sub:'Nomor resi tidak terdeteksi kurir dalam 3 hari kerja.',to:'buyer'},
+ mediator_release:{title:'Mediator memutuskan: dana ke penjual',sub:'Mediator manusia menilai keberatan pembeli tidak terbukti.',to:'seller'},
+ mediator_refund:{title:'Mediator memutuskan: dana ke pembeli',sub:'Mediator manusia menilai keberatan pembeli terbukti.',to:'buyer'},
+ appeal_release:{title:'Banding diterima: dana dicairkan',sub:'Penahanan tidak terbukti, dana langsung dicairkan ke penjual.',to:'seller'}
+};
+
+/* ===== State tunggal ===== */
+function fresh(){return{
+ role:'buyer',scenario:'A',day:0,
+ b:{screen:'home',payStage:'choose',method:'qris',payT:600,agree:false,loading:false,reason:'',files:[],rate:0,err:{}},
+ f:{code:'RKB-7Q4M-2D9',provider:'Rekber Nusantara Pay',pname:'',pprice:'',pnote:'',resi:'',note:''},
+ provRes:null,codeErr:'',
+ s:{tab:'dash',created:null,err:{}},m:{sel:null,tab:'queue'},
+ invoices:Object.assign({},SEED_INV),cur:null,tx:null,past:[],fx:false,seq:1,
+ tour:{on:true,i:0}
+};}
+let S=fresh();
+let lastKey='';
+
+/* ===== Notifikasi dan dialog ===== */
+let tt;
+function toast(msg,kind){const el=$('#toast');el.textContent=msg;el.className='toast show '+(kind||'');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),3000);}
+let modalCb=null;
+function ask(o){const m=$('#modal');
+ m.innerHTML='<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mt"><h3 id="mt">'+esc(o.title)+'</h3><div class="stack">'+o.body+'</div><div class="mrow"><button class="btn ghost" data-act="mclose" type="button">'+(o.cancel||'Batal')+'</button><button class="btn '+(o.danger?'danger':'primary')+'" data-act="mok" type="button">'+esc(o.ok||'Lanjutkan')+'</button></div></div>';
+ m.hidden=false;modalCb=o.onOk;const f=m.querySelector('textarea,input,.btn.primary,.btn.danger');if(f)f.focus();}
+function closeModal(){$('#modal').hidden=true;modalCb=null;}
+function copy(text,label){
+ const done=()=>toast((label||'Teks')+' disalin','good');
+ const fb=()=>{try{const t=document.createElement('textarea');t.value=text;t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();done();}catch(e){toast('Salin manual: '+text,'info');}};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fb);}else fb();
+}
+
+/* ===== Logika bisnis ===== */
+const feeOf=p=>Math.max(1000,Math.round(p*0.005/100)*100);
+const genCode=()=>{const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',r=()=>a[Math.floor(Math.random()*a.length)];return 'RKB-'+r()+r()+r()+r()+'-'+r()+r()+r();};
+function mcheck(name,price){const n=String(name).toLowerCase();const k=Object.keys(MARKET).find(k=>n.indexOf(k)>-1);if(!k)return null;return{ref:MARKET[k],ratio:price/MARKET[k]};}
+function aiHold(inv){
+ const r=[],sig=[];let days=4;
+ r.push('Penjual terverifikasi sejak '+SELLER.since+', '+SELLER.trx+' transaksi, '+SELLER.rating+'% ulasan baik.');
+ const m=mcheck(inv.item,inv.price);
+ if(m&&m.ratio<0.5){days=8;sig.push('Harga jauh di bawah pasar');r.push('Harga sekitar '+Math.round((1-m.ratio)*100)+'% di bawah kisaran pasar (±'+rp(m.ref)+'). Durasi tahan diperpanjang agar ada waktu memeriksa. Ini sinyal untuk ditinjau, bukan pemblokiran.');}
+ else r.push('Harga masih dalam kisaran wajar, jadi durasi tahan dibuat lebih pendek.');
+ return{days:days,reasons:r,signals:sig};
+}
+function ev(t,w){S.tx.events.unshift({day:S.day,t:t,w:w||'sys'});}
+function startTx(){
+ const inv=S.cur,a=aiHold(inv),fee=feeOf(inv.price);
+ if(S.tx&&S.tx.status==='done'){S.past.push(S.tx);}
+ S.tx={id:'TRX-'+(2600+S.seq++),inv:inv,item:inv.item,price:inv.price,fee:fee,total:inv.price+fee,art:inv.art,method:S.b.method,paidDay:S.day,status:'held',ai:a,signals:a.signals.slice(),resi:null,resiFlag:false,shippedDay:null,deliveredDay:null,outcome:null,doneDay:null,dispute:null,appeal:null,events:[]};
+ ev('Pembayaran diterima. Dana ditahan oleh penyedia berizin.','sys');
+ ev('Menunggu penjual mengirim barang dan mengisi nomor resi.','sys');
+ S.fx=true;
+}
+function ship(resi){
+ const t=S.tx;t.status='shipped';t.shippedDay=S.day;t.resi=resi;t.resiFlag=!/^KKX\d{10}$/.test(resi);t.deliveredDay=null;
+ t.signals=t.signals.filter(s=>s!=='Resi tidak valid');
+ ev('Penjual mengirim barang. Resi '+resi+' tercatat.','seller');
+ if(t.resiFlag){t.signals.push('Resi tidak valid');ev('Sinyal AI: resi belum terdeteksi di sistem kurir. Tidak ada pemblokiran otomatis; penjual dapat memperbaiki resi.','ai');toast('Sinyal AI: resi belum terdeteksi kurir','warn');}
+ else toast('Penjual mengirim barang. Resi tercatat.');
+ S.fx=true;
+}
+function finish(o){
+ const t=S.tx;t.status='done';t.outcome=o;t.doneDay=S.day;t.proof='BKT-'+t.id.slice(4)+'-'+(7100+S.day*3);
+ ev(OUT[o].title+'.','sys');
+ if(t.dispute)t.dispute.status='resolved';
+ if(t.appeal&&(t.appeal.status==='review'||t.appeal.status==='more'))t.appeal.status='closed';
+ S.fx=true;toast(OUT[o].title,OUT[o].to==='buyer'?'info':'good');
+}
+function openDispute(reason,note,files){
+ const t=S.tx;
+ t.dispute={openedDay:S.day,reason:reason,note:note||'',buyerFiles:files.slice(),sellerFiles:[],status:'open',extra:false,extraAsked:null,extraBuyer:false,extraSeller:false,escalated:false};
+ ev('Pembeli mengajukan keberatan: '+reason+'. Bukti diteruskan ke mediator.','buyer');S.fx=true;
+}
+const disputeActive=t=>!!(t&&t.dispute&&t.dispute.status!=='resolved'&&t.status!=='done');
+const SELLER_FILES=['foto-kemasan-sebelum-kirim.jpg','video-packing-lengkap.mp4'];
+function dayTick(){
+ S.day++;
+ const t=S.tx;if(!t||t.status==='done')return;
+ if(disputeActive(t)){
+  const d=t.dispute;
+  if(S.scenario==='D'&&!d.sellerFiles.length&&S.day>=d.openedDay+1){d.sellerFiles=SELLER_FILES.slice();ev('Penjual mengunggah bukti sanggahan.','seller');}
+  if(S.scenario==='D'&&d.extra&&!d.extraSeller&&S.day>=d.extraAsked+1){d.extraSeller=true;d.sellerFiles.push('tanda-terima-kurir.jpg');ev('Penjual menambahkan bukti: tanda terima kurir.','seller');}
+  if(S.day>=d.openedDay+7&&!d.escalated){d.escalated=true;ev('Batas 7 hari kerja terlewati tanpa kesepakatan. Jalur pengaduan lanjutan ke BI terbuka.','sys');toast('Batas 7 hari kerja terlewati. Jalur pengaduan BI terbuka.','warn');}
+  return;
+ }
+ if(t.status==='held'){
+  if(S.scenario!=='B'&&S.day>=t.paidDay+1)ship('KKX'+(7300400000+S.seq*7919+S.day*313));
+  else if(S.day>=t.paidDay+3)finish('refund_noship');
+ }else if(t.status==='shipped'){
+  if(t.resiFlag){if(S.day>=t.shippedDay+3)finish('refund_resi');return;}
+  if(t.deliveredDay==null){if(S.day>=t.shippedDay+2){t.deliveredDay=S.day;ev('Resi kurir: paket diterima di alamat tujuan.','sys');S.fx=true;toast('Resi menunjukkan paket diterima');}}
+  else if(S.day>=t.deliveredDay+3)finish('auto_release');
+ }
+}
+function nextDeadline(t){
+ if(!t||t.status==='done')return null;
+ if(disputeActive(t))return{label:'Mediator memutuskan paling lambat',day:t.dispute.openedDay+7,total:7,start:t.dispute.openedDay,hint:'Jika belum disepakati, Anda dapat mengadu ke BI.'};
+ if(t.status==='held')return{label:'Penjual harus mengirim paling lambat',day:t.paidDay+3,total:3,start:t.paidDay,hint:'Jika tidak dikirim, dana kembali ke pembeli.'};
+ if(t.resiFlag)return{label:'Resi harus terdeteksi kurir paling lambat',day:t.shippedDay+3,total:3,start:t.shippedDay,hint:'Jika tidak terdeteksi, dana kembali ke pembeli.'};
+ if(t.deliveredDay!=null)return{label:'Dana cair otomatis ke penjual',day:t.deliveredDay+3,total:3,start:t.deliveredDay,hint:'Berlaku jika pembeli tidak merespons.'};
+ return{label:'Perkiraan barang tiba',day:t.shippedDay+2,total:2,start:t.shippedDay,hint:'Pembeli dapat mengonfirmasi kapan saja setelah barang diterima.'};
+}
+function courier(t){
+ if(!t.resi)return[];
+ if(t.resiFlag)return[{done:true,t:'Resi tercatat oleh penjual',p:fshort(t.shippedDay)},{warn:true,t:'Belum terdeteksi di sistem KilatKu Ekspres',p:'Periksa ulang nomor resi'}];
+ return[
+  {done:true,t:'Paket diserahkan ke KilatKu Ekspres',p:'Yogyakarta · '+fshort(t.shippedDay)},
+  {done:S.day>=t.shippedDay+1,t:'Transit di hub Semarang',p:fshort(t.shippedDay+1)},
+  {done:t.deliveredDay!=null,t:'Paket diterima di alamat tujuan',p:fshort(t.shippedDay+2)}
+ ];
+}
+const LBL={release:'Cairkan ke penjual',refund:'Kembalikan ke pembeli',more:'Minta bukti tambahan'};
+function aiDispute(t){
+ const d=t.dispute,b=d.buyerFiles.length,s=d.sellerFiles.length,rs=[],sig=t.signals.slice();let sug='more',conf=50;
+ rs.push('Keberatan pembeli: “'+d.reason+'”, dengan '+b+' bukti terlampir.');
+ rs.push(s?'Penjual melampirkan '+s+' bukti sanggahan.':'Penjual belum melampirkan bukti sanggahan.');
+ if(d.reason==='Barang tidak sampai'){
+  if(t.deliveredDay!=null){rs.push('Resi kurir mencatat paket diterima di alamat tujuan, tetapi pembeli menyatakan belum menerima.');conf=58;}
+  else if(t.resiFlag){rs.push('Resi tidak pernah terdeteksi kurir.');sug='refund';conf=74;}
+  else{rs.push('Resi belum mencatat paket diterima.');conf=52;}
+ }else if(d.reason==='Barang rusak'){
+  if(b&&s){rs.push('Bukti kedua pihak saling bertentangan: kerusakan bisa terjadi saat pengiriman.');conf=54;}
+  else if(b){rs.push('Hanya pembeli yang melampirkan bukti kerusakan.');sug='refund';conf=68;}
+ }else if(d.reason==='Tidak sesuai deskripsi'){
+  if(b&&!s){rs.push('Bukti pembeli menunjukkan perbedaan dengan deskripsi; penjual belum menyanggah.');sug='refund';conf=66;}
+  else{rs.push('Perlu perbandingan foto produk dengan deskripsi tagihan.');conf=52;}
+ }else conf=45;
+ if(s&&!b){sug='release';conf=60;rs.push('Pembeli belum melampirkan bukti pendukung.');}
+ if(d.extraSeller||d.extraBuyer){conf=Math.min(88,conf+12);rs.push('Bukti tambahan sudah diterima dan ikut dipertimbangkan.');if(sug==='more'&&b&&s){sug=d.reason==='Barang tidak sampai'?'release':'refund';}}
+ return{sug:sug,conf:conf,rs:rs,sig:sig};
+}
+function aiAppeal(t){
+ const rs=['Penahanan awal dilakukan karena dana menunggu pengiriman dan konfirmasi pembeli.'];let sug='release',conf=78;
+ if(t.signals.length){sug='reject';conf=62;rs.push('Masih ada sinyal: '+t.signals.join(', ').toLowerCase()+'.');}
+ else rs.push('Tidak ada sinyal risiko aktif dan resi valid. Riwayat penjual baik.');
+ if(t.status!=='shipped'||t.resiFlag){sug='reject';conf=70;rs.push('Barang belum terbukti dikirim dengan resi valid, jadi dana belum bisa dicairkan.');}
+ return{sug:sug,conf:conf,rs:rs,sig:t.signals.slice()};
+}
+const heldAmt=()=>S.tx&&S.tx.status!=='done'?S.tx.price:0;
+const releasedAmt=()=>BASE_RELEASED+S.past.concat(S.tx&&S.tx.status==='done'?[S.tx]:[]).filter(t=>OUT[t.outcome].to==='seller').reduce((a,t)=>a+t.price,0);
+function advance(n){for(let i=0;i<n;i++)dayTick();render();toast('Maju '+n+' hari kerja → '+fshort(S.day),'info');}
+function reset(opts){const o=S;S=fresh();S.role=o.role;S.scenario=o.scenario;S.tour=o.tour;if(opts){if(opts.role)S.role=opts.role;if(opts.scenario)S.scenario=opts.scenario;}lastKey='';}
+function quickPay(){const inv=S.invoices['RKB-7Q4M-2D9'];S.cur=inv;S.b.method='qris';startTx();S.b.screen='status';}
+function seedDispute(){
+ reset({role:'mediator',scenario:'D'});quickPay();
+ while(S.tx.deliveredDay==null&&S.day<10)dayTick();
+ openDispute('Barang rusak','Kemasan penyok dan tas robek di bagian jahitan.',['foto-kemasan-penyok.jpg','foto-jahitan-robek.jpg']);
+ S.m.sel='dispute';
+}
+
+/* ===== Elemen visual bersama ===== */
+function art(kind,n){
+ const sh={
+  bag:'<path d="M112 72c0-26 16-42 48-42s48 16 48 42" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="7" stroke-linecap="round"/><path d="M82 72h156l12 90c1 8-5 14-13 14H83c-8 0-14-6-13-14L82 72z" fill="rgba(255,255,255,.93)"/><path d="M98 100h124M94 124h132M92 148h136" stroke="rgba(20,168,150,.5)" stroke-width="5" stroke-linecap="round"/>',
+  ear:'<g fill="rgba(255,255,255,.95)"><circle cx="116" cy="80" r="30"/><rect x="130" y="86" width="14" height="66" rx="7"/><circle cx="204" cy="80" r="30"/><rect x="176" y="86" width="14" height="66" rx="7"/></g><circle cx="116" cy="80" r="12" fill="rgba(20,168,150,.55)"/><circle cx="204" cy="80" r="12" fill="rgba(20,168,150,.55)"/>',
+  box:'<path d="M160 28l80 44v66l-80 44-80-44V72l80-44z" fill="rgba(255,255,255,.93)"/><path d="M80 72l80 44 80-44M160 116v66" stroke="rgba(11,42,85,.35)" stroke-width="4" fill="none"/>'
+ };
+ const id='gr'+n;
+ return '<div class="art"><svg viewBox="0 0 320 180" role="img" aria-label="Ilustrasi barang"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B2A55"/><stop offset="1" stop-color="#14A896"/></linearGradient></defs><rect width="320" height="180" fill="url(#'+id+')"/><circle cx="276" cy="26" r="48" fill="rgba(255,255,255,.1)"/>'+(sh[kind]||sh.box)+'</svg></div>';
+}
+function qrSvg(seed){
+ let h=5381;for(let i=0;i<seed.length;i++)h=(h*33+seed.charCodeAt(i))>>>0;if(!h)h=1;
+ const n=25,rnd=()=>{h^=h<<13;h>>>=0;h^=h>>>17;h^=h<<5;h>>>=0;return h/4294967296;};
+ const inF=(x,y)=>(x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9);let s='';
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){if(inF(x,y))continue;if(rnd()>.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1"/>';}
+ const f=(ox,oy)=>'<path fill-rule="evenodd" d="M'+ox+' '+oy+'h7v7h-7zM'+(ox+1)+' '+(oy+1)+'v5h5v-5z"/><rect x="'+(ox+2)+'" y="'+(oy+2)+'" width="3" height="3"/>';
+ return '<svg viewBox="-1 -1 27 27" class="qr" role="img" aria-label="Kode QRIS contoh"><g fill="currentColor">'+s+f(0,0)+f(n-7,0)+f(0,n-7)+'</g></svg>';
+}
+function ring(rem,total){const c=2*Math.PI*26,p=Math.max(0,Math.min(1,rem/total));
+ return '<div class="ring"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--line)" stroke-width="7"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--teal-btn)" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+(c*(1-p)).toFixed(1)+'"/></svg><div class="tx"><span>'+Math.max(0,rem)+'<small>hari kerja</small></span></div></div>';}
+function stepper(idx,pop){
+ const L=[['Dana ditahan','lock'],['Barang dikirim','truck'],['Selesai','check']];
+ return '<div class="stepper" role="list" aria-label="Status transaksi">'+L.map((l,i)=>'<div class="st '+(i<idx?'done':i===idx?'cur':'')+(pop&&i===idx?' pop':'')+'" role="listitem" '+(i===idx?'aria-current="step"':'')+'><span class="nd">'+(i<idx?ic('check',18):ic(l[1],17))+'</span>'+l[0]+'</div>').join('')+'</div>';
+}
+const fileList=(a,rm)=>a.length?'<ul class="files">'+a.map((f,i)=>'<li>'+ic(/\.(mp4|mov)$/.test(f)?'play':'image',16)+'<span>'+esc(f)+'</span>'+(rm?'<button class="x" data-act="rmfile" data-i="'+i+'" aria-label="Hapus '+esc(f)+'" type="button">'+ic('x',16)+'</button>':'')+'</li>').join('')+'</ul>':'<p class="tiny">Belum ada berkas.</p>';
+const backBtn=(act,txt)=>'<button class="btn ghost sm" data-act="'+act+'" type="button" style="align-self:flex-start">'+ic('back',18)+(txt||'Kembali')+'</button>';
+const aiBlock=a=>'<div class="ai"><div class="hd">'+ic('spark',16)+'Saran AI · hanya saran</div><p style="font-size:14px"><b>Perkiraan durasi tahan: sekitar '+a.days+' hari kerja</b></p><ul>'+a.reasons.map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul>'+(a.signals.length?'<div class="chips">'+a.signals.map(s=>'<span class="tag warn">'+ic('flag',12)+esc(s)+'</span>').join('')+'</div>':'')+'<p class="tiny">AI menilai dan menyarankan, manusia memutuskan. Sinyal tidak memblokir transaksi. Audit bias dilakukan berkala dan dilaporkan ke regulator.</p></div>';
+
+/* ===== Layar Pembeli ===== */
+function vHome(){
+ const pr=S.provRes,t=S.tx;let res='';
+ if(pr)res=pr.ok?'<div class="res ok">'+ic('shield',22)+'<div><b>Berizin BI</b><span>'+esc(pr.name)+' · '+esc(pr.no)+'. Penyedia ini terdaftar.</span></div></div>':'<div class="res no">'+ic('alert',22)+'<div><b>Tidak ditemukan</b><span>“'+esc(pr.q)+'” tidak ada di daftar penyedia berizin. Jangan transfer ke rekening pribadi atau penyedia yang tidak terdaftar.</span></div></div>';
+ return '<div class="pad">'
+ +(t&&t.status!=='done'?'<button class="q" data-act="goStatus" type="button"><span class="rules"><span class="ico" style="display:grid;width:40px;height:40px;border-radius:12px;background:var(--teal-soft);color:var(--teal-ink);place-items:center">'+ic('clock',20)+'</span></span><span class="grow"><b style="display:block;font-size:13px">Transaksi berjalan</b><span class="mut">'+esc(t.item)+'</span></span>'+ic('chev',18)+'</button>':'')
+ +'<div class="hero">'+rr()+'<h1>Cek sebelum bayar</h1><p>Masukkan kode tagihan dari penjual. Syarat pencairan dana tampil sebelum Anda membayar.</p>'
+ +'<div><label class="lbl" for="in-code">Kode tagihan</label><div class="row-in"><input id="in-code" class="inp'+(S.codeErr?' bad':'')+'" data-bind="code" data-enter="checkCode" value="'+esc(S.f.code)+'" autocomplete="off" spellcheck="false" aria-describedby="code-err"><button class="icbtn" data-act="scan" aria-label="Pindai kode QR" type="button">'+ic('scan',22)+'</button></div><div class="err" id="code-err" role="alert">'+esc(S.codeErr)+'</div></div>'
+ +'<button class="btn accent block" data-act="checkCode" type="button">'+ic('search',18)+'Cek tagihan</button>'
+ +'<div class="chips">Coba kode: <button class="chip" data-act="fillCode" data-v="RKB-7Q4M-2D9" type="button">Normal</button><button class="chip" data-act="fillCode" data-v="RKB-K3L8-X0P" type="button">Harga janggal</button><button class="chip" data-act="fillCode" data-v="RKB-BESAR-1" type="button">Di atas batas</button></div></div>'
+ +'<section class="card"><h2>Periksa legalitas penyedia</h2><p class="mut">Pastikan penyedia rekber terdaftar berizin sebelum Anda mentransfer. Daftar ini data fiktif untuk prototipe.</p>'
+ +'<div class="row-in"><input id="in-prov" class="inp" data-bind="provider" data-enter="checkProv" value="'+esc(S.f.provider)+'" placeholder="Nama penyedia atau akun" aria-label="Nama penyedia"><button class="btn ghost" data-act="checkProv" type="button">Periksa</button></div>'+res
+ +'<div class="chips"><button class="chip" data-act="fillProv" data-v="Rekber Nusantara Pay" type="button">Contoh berizin</button><button class="chip" data-act="fillProv" data-v="Rekber Kilat Murah" type="button">Contoh tidak terdaftar</button></div></section>'
+ +'<section class="card"><h2>Enam langkah rekber</h2><ol class="steps"><li>Pilih Rekber Resmi dan baca syarat pencairan.</li><li>Bayar lewat QRIS atau BI-FAST. Dana ditahan penyedia berizin.</li><li>Penjual mengirim barang dan nomor resi tercatat.</li><li>Anda mengonfirmasi penerimaan.</li><li>Dana dicairkan ke penjual.</li><li>Jika ada keberatan, mediator manusia mengkaji bukti kedua pihak.</li></ol></section>'
+ +'<p class="tiny center" style="align-items:center">Dana tetap rupiah yang sama, bukan token atau stablecoin. Tahap awal: nilai transaksi maksimal '+rp(MAX_PRICE)+'.</p></div>';
+}
+function vInvoice(){
+ const back=backBtn('goHome','Kembali');
+ if(S.b.loading)return '<div class="pad">'+back+'<div class="sk" style="aspect-ratio:16/9"></div><div class="sk" style="height:78px"></div><div class="sk" style="height:130px"></div><div class="sk" style="height:150px"></div></div>';
+ const inv=S.cur,fee=feeOf(inv.price),total=inv.price+fee,over=inv.price>MAX_PRICE,a=aiHold(inv);
+ const head=art(inv.art,1)
+ +'<div class="card"><div class="row sp"><h2 style="font-size:17px">'+esc(inv.item)+'</h2>'+rr(true)+'</div><p class="mut">'+esc(inv.note||'')+'</p>'
+ +'<div class="row" style="gap:12px"><span class="logo" style="width:40px;height:40px;border-radius:14px">'+ic('store',20)+'</span><div class="grow"><b>'+SELLER.name+vb()+'</b><div class="tiny">Terverifikasi · '+SELLER.trx+' transaksi · '+SELLER.rating+'% ulasan baik · '+SELLER.city+'</div></div></div></div>';
+ if(over)return '<div class="pad">'+back+head+'<div class="res no">'+ic('alert',22)+'<div><b>Nilai transaksi melebihi batas</b><span>Tagihan ini bernilai '+rp(inv.price)+'. Pada tahap awal, Rekber Resmi hanya melayani transaksi sampai '+rp(MAX_PRICE)+'. Minta penjual membuat tagihan yang lebih kecil atau memecahnya.</span></div></div><button class="btn primary block" data-act="goHome" type="button">Kembali ke beranda</button></div>';
+ return '<div class="pad">'+back+head
+ +'<div class="card"><h2>Rincian pembayaran</h2><div class="pr"><span>Harga barang</span><b class="num">'+rp(inv.price)+'</b></div><div class="pr"><span>Biaya layanan</span><b class="num">'+rp(fee)+'</b></div><div class="pr tot"><span>Total</span><span class="num">'+rp(total)+'</span></div></div>'
+ +'<div class="card"><h2>Syarat pencairan dana</h2><p class="mut">Dana Anda ditahan penyedia berizin, terpisah dari kas perusahaan. Ini aturannya, sebelum Anda membayar:</p><ul class="rules">'
+ +'<li><span class="ico">'+ic('check',17)+'</span><div><b>Anda konfirmasi barang sampai</b>Dana langsung cair ke penjual.</div></li>'
+ +'<li><span class="ico">'+ic('refresh',17)+'</span><div><b>Penjual tidak mengirim dalam 3 hari kerja</b>Dana kembali ke Anda.</div></li>'
+ +'<li><span class="ico">'+ic('clock',17)+'</span><div><b>Anda tidak merespons 3 hari kerja</b>Dihitung setelah resi menunjukkan barang diterima. Dana cair otomatis ke penjual.</div></li>'
+ +'<li><span class="ico">'+ic('scale',17)+'</span><div><b>Ada keberatan</b>Mediator manusia memutuskan dalam 7 hari kerja. Jika belum disepakati, ada jalur pengaduan lanjutan ke Bank Indonesia.</div></li></ul></div>'
+ +aiBlock(a)
+ +'<label class="chk" for="agree"><input type="checkbox" id="agree" data-act="agree"'+(S.b.agree?' checked':'')+'><span>Saya sudah membaca syarat pencairan dana di atas.</span></label>'
+ +'<button class="btn primary block" id="paybtn" data-act="toPay" type="button"'+(S.b.agree?'':' disabled')+'>'+ic('lock',18)+'Bayar '+rp(total)+'</button></div>';
+}
+function vPay(){
+ const inv=S.cur,total=inv.price+feeOf(inv.price),st=S.b.payStage,m=S.b.method;let body='';
+ if(st==='choose')body='<div class="card"><h2>Pilih cara bayar</h2><div class="stack" role="radiogroup" aria-label="Metode pembayaran">'
+  +'<button class="opt" role="radio" aria-checked="'+(m==='qris')+'" data-act="method" data-v="qris" type="button"><span class="rd"></span>'+ic('qr',22)+'<span class="grow">QRIS<small>Pindai dari aplikasi bank atau dompet digital</small></span></button>'
+  +'<button class="opt" role="radio" aria-checked="'+(m==='bifast')+'" data-act="method" data-v="bifast" type="button"><span class="rd"></span>'+ic('bank',22)+'<span class="grow">BI-FAST<small>Transfer antarbank, biaya rendah, dana tiba seketika</small></span></button></div>'
+  +'<button class="btn primary block" data-act="payNext" type="button">Lanjutkan</button></div>';
+ else if(st==='wait')body='<div class="card center"><h2>'+(m==='qris'?'Pindai kode QRIS':'Transfer BI-FAST')+'</h2><p class="mut">Total pembayaran</p><div class="big num">'+rp(total)+'</div>'
+  +(m==='qris'?'<div class="qrbox">'+qrSvg(inv.code+total)+'</div><p class="tiny">Berlaku <b id="tmr" class="num">'+mmss(S.b.payT)+'</b> · Simulasi, tidak ada uang sungguhan</p>'
+  :'<div class="card flat" style="width:100%;text-align:left"><div class="pr"><span>Bank penampung</span><b>Bank Sinar Nusa (fiktif)</b></div><div class="pr"><span>Nomor rekening</span><b class="num">8800 1234 5678</b></div><div class="pr"><span>Atas nama</span><b>Rekber Nusantara Pay – Dana Pembeli</b></div><button class="btn ghost sm" data-act="copyAcc" type="button">'+ic('copy',16)+'Salin nomor rekening</button></div><p class="tiny">Berlaku <b id="tmr" class="num">'+mmss(S.b.payT)+'</b> · Simulasi, tidak ada uang sungguhan</p>')
+  +'<button class="btn teal block" data-act="simPay" type="button">Simulasikan pembayaran berhasil</button><button class="btn ghost block" data-act="payBack" type="button">Ganti cara bayar</button></div>';
+ else if(st==='processing')body='<div class="card center" style="padding:40px 16px"><div class="spin" role="progressbar" aria-label="Memproses"></div><h2>Memproses pembayaran</h2><p class="mut">Mengonfirmasi dengan penyedia berizin…</p></div>';
+ else body='<div class="card center"><div class="okmark">'+ic('check',40)+'</div><h2 style="font-size:20px">Pembayaran berhasil</h2><p class="mut">'+rp(total)+' kini ditahan oleh Rekber Nusantara Pay, penyedia berizin, terpisah dari kas perusahaan.</p><div class="res info" style="text-align:left;width:100%">'+ic('lock',20)+'<div><b>Dana aman ditahan</b><span>Dana hanya bergerak sesuai syarat yang Anda baca tadi.</span></div></div><button class="btn primary block" data-act="goStatus" type="button">Lihat status transaksi</button></div>';
+ return '<div class="pad">'+(st==='choose'||st==='wait'?backBtn(st==='wait'?'payBack':'toInvoice','Kembali'):'')+'<div class="row"><span class="grow"><b>'+esc(inv.item)+'</b><div class="tiny">'+SELLER.name+'</div></span>'+rr(true)+'</div>'+body+'</div>';
+}
+function vStatus(){
+ const t=S.tx;
+ if(!t)return '<div class="pad"><div class="empty"><span class="eb">'+ic('box',28)+'</span><h2>Belum ada transaksi</h2><p class="mut">Transaksi Anda akan tampil di sini setelah Anda membayar lewat Rekber Resmi.</p><button class="btn primary" data-act="goHome" type="button">Cek tagihan</button></div></div>';
+ if(t.status==='done')return vDone();
+ const pop=S.fx;S.fx=false;
+ const idx=t.status==='held'?0:1,dl=nextDeadline(t),rem=dl.day-S.day,dis=disputeActive(t),d=t.dispute;
+ let h='<div class="pad"><div class="row"><span class="grow"><b style="font-size:16px">'+esc(t.item)+'</b><div class="tiny">'+t.id+' · '+SELLER.name+'</div></span>'+rr(true)+'</div>'
+ +'<div class="card">'+stepper(idx,pop)+'<div class="row sp" style="margin-top:4px"><div><div class="tiny">Dana ditahan</div><div class="big num">'+rp(t.total)+'</div></div><span class="tag good">'+ic('lock',12)+'Aman</span></div><p class="tiny">Ditahan oleh Rekber Nusantara Pay (berizin), terpisah dari kas perusahaan.</p></div>'
+ +'<div class="card"><div class="row" style="gap:14px">'+ring(rem,dl.total)+'<div class="grow"><b>'+dl.label+'</b><div class="mut">'+fday(dl.day)+'</div><div class="tiny">'+dl.hint+'</div></div></div></div>';
+ if(dis){
+  h+='<div class="card" style="border-color:var(--accent)"><div class="row sp"><h2>Keberatan Anda sedang dikaji</h2><span class="tag warn">Sengketa</span></div>'
+  +'<p class="mut">Alasan: <b>'+esc(d.reason)+'</b>. Mediator manusia memutuskan paling lambat <b>'+fday(d.openedDay+7)+'</b> (7 hari kerja).</p>'
+  +(d.extra?'<div class="res warn">'+ic('upload',20)+'<div><b>Mediator meminta bukti tambahan</b><span>Unggah foto unboxing atau tangkapan layar percakapan.</span></div></div>'+(d.extraBuyer?'<span class="tag good">Bukti tambahan terkirim</span>':'<button class="btn accent block" data-act="extraBuyer" type="button">'+ic('upload',18)+'Unggah bukti tambahan</button>'):'')
+  +'<h3>Bukti Anda</h3>'+fileList(d.buyerFiles)+'<h3>Bukti penjual</h3>'+fileList(d.sellerFiles)
+  +(d.escalated?'<div class="res no">'+ic('flag',20)+'<div><b>Belum disepakati dalam 7 hari kerja</b><span>Anda dapat melanjutkan ke pengaduan Bank Indonesia.</span></div></div>':'')
+  +'<p class="tiny">Jalur lanjutan: <a href="https://www.bi.go.id" target="_blank" rel="noopener">Pengaduan konsumen ke Bank Indonesia</a> (BICARA 131).</p></div>';
+ }
+ h+='<div class="card"><div class="stack"><button class="btn teal block" data-act="received" type="button"'+(t.status!=='shipped'||dis?' disabled':'')+'>'+ic('check',18)+'Barang sudah sampai</button><button class="btn danger block" data-act="problem" type="button"'+(dis?' disabled':'')+'>'+ic('alert',18)+'Ada masalah</button></div><p class="tiny">'+(t.status==='held'?'“Barang sudah sampai” aktif setelah penjual mengirim barang.':dis?'Tombol dinonaktifkan selama mediator mengkaji keberatan.':'Tekan hanya jika barang benar-benar sudah di tangan Anda.')+'</p></div>';
+ if(t.resi){h+='<div class="card"><div class="row sp"><h2>Pelacakan resi</h2><button class="btn ghost sm" data-act="copyResi" type="button" aria-label="Salin nomor resi">'+ic('copy',16)+t.resi+'</button></div><ul class="tl">'+courier(t).map(c=>'<li class="'+(c.warn?'warn':c.done?'done':'todo')+'"><span class="pt">'+(c.done?ic('check',11):c.warn?ic('alert',11):'')+'</span><div><b>'+c.t+'</b><small>'+c.p+'</small></div></li>').join('')+'</ul><p class="tiny">KilatKu Ekspres (kurir fiktif)</p></div>';}
+ h+=aiBlock(t.ai);
+ h+='<div class="card"><h2>Riwayat</h2><ul class="ev">'+t.events.map(e=>'<li><time>'+fshort(e.day).slice(5)+'</time><span>'+esc(e.t)+'</span></li>').join('')+'</ul></div></div>';
+ return h;
+}
+function vProblem(){
+ const b=S.b,e=b.err;
+ return '<div class="pad">'+backBtn('goStatus','Kembali')+'<div><h2 style="font-size:20px">Ada masalah dengan pesanan?</h2><p class="mut">Ceritakan masalahnya. Bukti dari Anda dan penjual akan dikaji mediator manusia.</p></div>'
+ +'<div class="card"><h2>Alasan</h2><div class="stack" role="radiogroup" aria-label="Alasan keberatan">'+REASONS.map(r=>'<button class="opt" role="radio" aria-checked="'+(b.reason===r)+'" data-act="reason" data-v="'+r+'" type="button"><span class="rd"></span>'+r+'</button>').join('')+'</div><div class="err" role="alert">'+esc(e.reason||'')+'</div>'
+ +'<div><label class="lbl" for="in-note">Keterangan (opsional)</label><textarea id="in-note" class="inp" data-bind="note" placeholder="Contoh: kemasan penyok dan jahitan tas robek.">'+esc(S.f.note)+'</textarea></div></div>'
+ +'<div class="card"><h2>Bukti</h2><p class="mut">Unggah foto atau video. Ini simulasi: berkas contoh akan ditambahkan.</p>'+fileList(b.files,true)+'<button class="btn ghost block" data-act="addfile" type="button">'+ic('upload',18)+'Unggah foto/video</button><div class="err" role="alert">'+esc(e.files||'')+'</div></div>'
+ +'<button class="btn primary block" data-act="sendProblem" type="button">'+ic('scale',18)+'Kirim ke mediator</button></div>';
+}
+function vDone(){
+ const t=S.tx,o=OUT[t.outcome],toB=o.to==='buyer',r=S.b.rate;
+ return '<div class="pad"><div class="card center"><div class="okmark" style="'+(toB?'background:var(--info-soft);color:var(--info)':'')+'">'+ic(toB?'refresh':'check',40)+'</div><h2 style="font-size:19px">'+o.title+'</h2><p class="mut">'+o.sub+'</p></div>'
+ +'<div class="card">'+stepper(3,S.fx)+'</div>'
+ +'<div class="card"><h2>Ringkasan</h2><div class="pr"><span>Barang</span><b>'+esc(t.item)+'</b></div><div class="pr"><span>Harga</span><b class="num">'+rp(t.price)+'</b></div><div class="pr"><span>Biaya layanan</span><b class="num">'+rp(t.fee)+'</b></div><div class="pr"><span>'+(toB?'Dana dikembalikan':'Dana diteruskan ke penjual')+'</span><b class="num">'+rp(toB?t.total:t.price)+'</b></div><div class="pr"><span>Penyedia</span><b>Rekber Nusantara Pay</b></div><div class="pr"><span>Selesai</span><b>'+fday(t.doneDay)+'</b></div></div>'
+ +'<div class="card"><div class="row sp"><div><h2>Bukti transaksi</h2><div class="num mut">'+t.proof+'</div></div><button class="btn ghost sm" data-act="copyProof" type="button">'+ic('copy',16)+'Salin</button></div></div>'
+ +'<div class="card center"><h2>Bagaimana pengalaman Anda?</h2><div class="stars" role="group" aria-label="Beri nilai">'+[1,2,3,4,5].map(i=>'<button class="'+(i<=r?'on':'')+'" data-act="rate" data-v="'+i+'" aria-label="'+i+' bintang" type="button">'+ic('star',28)+'</button>').join('')+'</div>'+(r?'<p class="mut">Terima kasih. Penilaian Anda membantu menjaga mutu Rekber Resmi.</p>':'')+'</div>'
+ +'<button class="btn primary block" data-act="newTx" type="button">Transaksi baru</button></div>';
+}
+function vAbout(){
+ return '<div class="pad"><div class="hero">'+rr()+'<h1>Tentang prototipe ini</h1><p>Wujud gagasan esai “Rekber Resmi (Trust Escrow)”: satu standar rekening bersama berizin untuk jual beli daring di marketplace, WhatsApp, dan media sosial.</p></div>'
+ +'<div class="card"><h2>Prinsip</h2><ul class="rules"><li><span class="ico">'+ic('lock',17)+'</span><div><b>Dana ditahan penyedia berizin</b>Terpisah dari kas perusahaan, tetap rupiah yang sama, bukan token.</div></li><li><span class="ico">'+ic('list',17)+'</span><div><b>Syarat dibaca sebelum bayar</b>Pencairan, pengembalian, dan mediasi diatur sejak awal.</div></li><li><span class="ico">'+ic('spark',17)+'</span><div><b>AI menyarankan, manusia memutuskan</b>AI menentukan durasi tahan dan menandai sinyal tanpa memblokir. Keputusan akhir ada pada mediator.</div></li><li><span class="ico">'+ic('scale',17)+'</span><div><b>Adil bagi penjual</b>Setiap penahanan punya alasan tertulis, batas waktu, dan tombol banding.</div></li></ul></div>'
+ +'<div class="card flat"><h3>Audit bias</h3><p class="mut">Audit bias model AI dilakukan berkala dan dilaporkan ke regulator.</p></div>'
+ +'<p class="tiny center" style="align-items:center"><b>Prototipe konsep – bukan layanan resmi Bank Indonesia.</b> Semua nama penyedia, kurir, dan data bersifat fiktif.</p></div>';
+}
+
+/* ===== Layar Penjual ===== */
+function holdReason(t){
+ let r;
+ if(disputeActive(t))r='Pembeli mengajukan keberatan, jadi dana ditahan sampai mediator manusia memutuskan.';
+ else if(t.status==='held')r='Dana pembeli ditahan sampai Anda mengirim barang dan mengisi nomor resi.';
+ else if(t.resiFlag)r='Nomor resi belum terdeteksi kurir, jadi dana tetap ditahan sampai resi diperbaiki.';
+ else r='Dana pembeli ditahan sampai pembeli mengonfirmasi barang diterima, atau otomatis cair 3 hari kerja setelah resi menunjukkan barang diterima.';
+ if(t.signals.indexOf('Harga jauh di bawah pasar')>-1)r+=' Sinyal AI: harga jauh di bawah pasar, jadi durasi tahan diperpanjang (bukan pemblokiran).';
+ return r;
+}
+function appealBox(t){
+ const a=t.appeal;if(!a)return '';
+ const m={review:['info','Banding diajukan','Menunggu keputusan mediator manusia.'],more:['warn','Mediator meminta bukti tambahan','Unggah bukti pendukung agar banding bisa diputuskan.'],rejected:['no','Banding ditolak','Dana tetap ditahan sesuai syarat. '+(a.note||'')],accepted:['ok','Banding diterima','Penahanan tidak terbukti, dana dicairkan segera.'],closed:['info','Banding ditutup','Transaksi sudah selesai.']}[a.status];
+ return '<div class="res '+m[0]+'">'+ic('scale',20)+'<div><b>'+m[1]+'</b><span>'+m[2]+'</span></div></div>';
+}
+function vSDash(){
+ const t=S.tx,hist=S.past.concat(t&&t.status==='done'?[t]:[]).slice().reverse();
+ let h='<div class="pad"><div class="row"><span class="logo" style="width:44px;height:44px;border-radius:14px">'+ic('store',22)+'</span><span class="grow"><b style="font-size:16px">'+SELLER.name+vb()+'</b><div class="tiny">Dasbor penjual UMKM</div></span>'+rr(true)+'</div>'
+ +'<div class="bal"><div class="card"><span class="tiny">Saldo tertahan</span><b class="num">'+rp(heldAmt())+'</b><span class="tag warn" style="width:fit-content">Menunggu syarat</span></div><div class="card"><span class="tiny">Saldo cair</span><b class="num">'+rp(releasedAmt())+'</b><span class="tag good" style="width:fit-content">Siap ditarik</span></div></div>';
+ if(t&&t.status!=='done'){
+  const dl=nextDeadline(t),max=disputeActive(t)?t.dispute.openedDay+7:t.paidDay+8,d=t.dispute,dis=disputeActive(t);
+  h+='<div class="card"><div class="row sp"><h2>Transaksi aktif</h2><span class="tag '+(t.status==='held'?'warn':'info')+'">'+(t.status==='held'?'Dana ditahan':'Barang dikirim')+'</span></div>'
+  +'<div class="row sp"><div><b>'+esc(t.item)+'</b><div class="tiny">'+t.id+' · '+rp(t.price)+'</div></div></div>'
+  +'<div class="card flat" style="gap:6px"><h3>Alasan penahanan</h3><p class="mut">'+esc(holdReason(t))+'</p></div>'
+  +'<div class="pr"><span>Sisa waktu</span><b>'+Math.max(0,dl.day-S.day)+' hari kerja</b></div><div class="tiny">'+dl.label+': '+fday(dl.day)+'. '+dl.hint+'</div>'
+  +'<div class="pr"><span>Batas maksimum penahanan</span><b>'+fday(max)+'</b></div>'
+  +appealBox(t)
+  +'<div class="stack">'+(t.status==='held'?'<button class="btn primary block" data-act="sTab" data-v="resi" type="button">'+ic('truck',18)+'Isi nomor resi</button>':'')
+  +'<button class="btn ghost block" data-act="appeal" type="button"'+(t.status==='held'||dis||(t.appeal&&(t.appeal.status==='review'||t.appeal.status==='more'))?' disabled':'')+'>'+ic('scale',18)+'Ajukan banding</button>'
+  +(t.status==='held'?'<p class="tiny">Banding tersedia setelah barang dikirim dan resi tercatat.</p>':'')+'</div></div>';
+  if(dis)h+='<div class="card" style="border-color:var(--accent)"><div class="row sp"><h2>Keberatan pembeli</h2><span class="tag warn">Sengketa</span></div><p class="mut">Alasan: <b>'+esc(d.reason)+'</b>'+(d.note?'. “'+esc(d.note)+'”':'')+'. Mediator memutuskan paling lambat '+fday(d.openedDay+7)+'.</p><h3>Bukti pembeli</h3>'+fileList(d.buyerFiles)+'<h3>Bukti Anda</h3>'+fileList(d.sellerFiles)
+   +(d.extra&&!d.extraSeller?'<div class="res warn">'+ic('upload',20)+'<div><b>Mediator meminta bukti tambahan</b><span>Unggah tanda terima kurir atau foto kondisi barang saat dikirim.</span></div></div>':'')
+   +'<button class="btn accent block" data-act="sellerEvidence" type="button">'+ic('upload',18)+(d.extra&&!d.extraSeller?'Unggah bukti tambahan':'Unggah bukti sanggahan')+'</button></div>';
+  h+='<div class="card"><h2>Riwayat transaksi ini</h2><ul class="ev">'+t.events.map(e=>'<li><time>'+fshort(e.day).slice(5)+'</time><span>'+esc(e.t)+'</span></li>').join('')+'</ul></div>';
+ }else h+='<div class="card"><div class="empty"><span class="eb">'+ic('box',28)+'</span><h2>Belum ada transaksi aktif</h2><p class="mut">Buat tagihan Rekber Resmi dan bagikan kodenya ke pembeli lewat WhatsApp atau media sosial.</p><button class="btn primary" data-act="sTab" data-v="create" type="button">'+ic('plus',18)+'Buat tagihan</button></div></div>';
+ h+='<div class="card"><h2>Riwayat</h2><ul class="ev">'+hist.map(x=>{const o=OUT[x.outcome];return '<li><span class="grow"><b style="color:var(--ink)">'+esc(x.item)+'</b><br>'+fshort(x.doneDay).slice(5)+' · '+o.title+'</span><b class="num" style="color:var(--ink)">'+rp(o.to==='seller'?x.price:0)+'</b></li>';}).join('')+HIST0.map(x=>'<li><span class="grow"><b style="color:var(--ink)">'+x.item+'</b><br>'+x.date+' · Dana cair</span><b class="num" style="color:var(--ink)">'+rp(x.amt)+'</b></li>').join('')+'</ul></div></div>';
+ return h;
+}
+function vSCreate(){
+ const c=S.s.created,e=S.s.err;
+ if(c){const m=mcheck(c.item,c.price),a=aiHold(c),link='https://rekber.example/bayar/'+c.code;
+  return '<div class="pad"><div class="card center"><div class="okmark">'+ic('check',40)+'</div><h2>Tagihan siap dibagikan</h2><p class="mut">'+esc(c.item)+' · '+rp(c.price)+'</p></div>'
+  +'<div class="card"><h2>Kode tagihan</h2><div class="row sp"><b class="big num" style="font-size:22px;letter-spacing:.02em">'+c.code+'</b><button class="btn ghost sm" data-act="copyCode" type="button">'+ic('copy',16)+'Salin</button></div>'
+  +'<h2>Tautan</h2><div class="row sp"><span class="mut grow" style="overflow-wrap:anywhere">'+link+'</span><button class="btn ghost sm" data-act="copyLink" type="button" aria-label="Salin tautan">'+ic('link',16)+'Salin</button></div>'
+  +'<button class="btn teal block" data-act="copyWA" type="button">'+ic('copy',18)+'Salin pesan untuk WhatsApp</button></div>'
+  +(a.signals.length?'<div class="res warn">'+ic('flag',20)+'<div><b>Sinyal AI: harga jauh di bawah pasar</b><span>Harga sekitar '+Math.round((1-m.ratio)*100)+'% di bawah kisaran pasar. Tagihan tetap aktif, tetapi durasi tahan pembeli diperkirakan '+a.days+' hari kerja. Ini saran, bukan pemblokiran.</span></div></div>':'<div class="res ok">'+ic('spark',20)+'<div><b>Harga wajar</b><span>Perkiraan durasi tahan '+a.days+' hari kerja.</span></div></div>')
+  +'<button class="btn primary block" data-act="asBuyer" type="button">'+ic('user',18)+'Uji sebagai pembeli</button><button class="btn ghost block" data-act="newInv" type="button">Buat tagihan lain</button></div>';}
+ return '<div class="pad"><div><h2 style="font-size:20px">Buat tagihan Rekber Resmi</h2><p class="mut">Pembeli akan melihat syarat pencairan sebelum membayar. Tahap awal: maksimal '+rp(MAX_PRICE)+' per transaksi.</p></div>'
+ +'<div class="card"><div><label class="lbl" for="in-pname">Nama barang</label><input id="in-pname" class="inp'+(e.name?' bad':'')+'" data-bind="pname" value="'+esc(S.f.pname)+'" placeholder="Contoh: Sepatu Kulit Handmade" autocomplete="off"><div class="err" role="alert">'+esc(e.name||'')+'</div></div>'
+ +'<div><label class="lbl" for="in-pprice">Harga (Rp)</label><input id="in-pprice" class="inp num'+(e.price?' bad':'')+'" data-bind="pprice" inputmode="numeric" value="'+esc(S.f.pprice)+'" placeholder="Contoh: 350000" autocomplete="off"><div class="err" role="alert">'+esc(e.price||'')+'</div></div>'
+ +'<div><label class="lbl" for="in-pnote">Catatan untuk pembeli (opsional)</label><textarea id="in-pnote" class="inp" data-bind="pnote" placeholder="Ukuran, warna, estimasi kirim">'+esc(S.f.pnote)+'</textarea></div>'
+ +'<div class="chips"><button class="chip" data-act="fillInv" data-v="1" type="button">Isi contoh</button><button class="chip" data-act="fillInv" data-v="2" type="button">Contoh di atas batas</button><button class="chip" data-act="fillInv" data-v="3" type="button">Contoh harga janggal</button></div>'
+ +'<button class="btn primary block" data-act="makeInv" type="button">'+ic('plus',18)+'Buat tagihan</button></div></div>';
+}
+function vSResi(){
+ const t=S.tx;
+ if(!t||t.status==='done')return '<div class="pad"><div class="empty"><span class="eb">'+ic('truck',28)+'</span><h2>Belum ada pesanan untuk dikirim</h2><p class="mut">Pesanan muncul di sini setelah pembeli membayar. Coba “Lewati ke setelah bayar” di Kontrol Demo.</p></div></div>';
+ const e=S.s.err.resi;
+ const form='<div class="card"><label class="lbl" for="in-resi">Nomor resi KilatKu Ekspres</label><input id="in-resi" class="inp num'+(e?' bad':'')+'" data-bind="resi" data-enter="saveResi" value="'+esc(S.f.resi)+'" placeholder="Contoh: KKX7300412345" autocomplete="off" spellcheck="false"><div class="err" role="alert">'+esc(e||'')+'</div>'
+  +'<div class="chips"><button class="chip" data-act="fillResi" data-v="KKX7300412345" type="button">Contoh valid</button><button class="chip" data-act="fillResi" data-v="AB12345678" type="button">Contoh tidak dikenal</button></div>'
+  +'<button class="btn primary block" data-act="saveResi" type="button">'+ic('truck',18)+(t.status==='held'?'Catat resi dan kirim':'Perbarui nomor resi')+'</button></div>';
+ if(t.status==='held')return '<div class="pad"><div><h2 style="font-size:20px">Kirim barang</h2><p class="mut">'+esc(t.item)+' · batas kirim '+fday(t.paidDay+3)+'. Jika lewat, dana kembali ke pembeli.</p></div>'+form+'</div>';
+ return '<div class="pad"><div><h2 style="font-size:20px">Pengiriman</h2><p class="mut">'+esc(t.item)+'</p></div><div class="card"><div class="row sp"><h2>Resi tercatat</h2><span class="tag '+(t.resiFlag?'warn':'good')+'">'+(t.resiFlag?'Belum terdeteksi':'Valid')+'</span></div><b class="num" style="font-size:18px">'+t.resi+'</b><ul class="tl">'+courier(t).map(c=>'<li class="'+(c.warn?'warn':c.done?'done':'todo')+'"><span class="pt">'+(c.done?ic('check',11):c.warn?ic('alert',11):'')+'</span><div><b>'+c.t+'</b><small>'+c.p+'</small></div></li>').join('')+'</ul></div>'
+  +(t.resiFlag?'<div class="res warn">'+ic('flag',20)+'<div><b>Sinyal AI: resi tidak valid</b><span>Resi belum ditemukan di sistem kurir. Dana tidak diblokir otomatis, tetapi kembali ke pembeli jika resi tidak terdeteksi dalam 3 hari kerja. Perbaiki di bawah.</span></div></div>'+form:'')+'</div>';
+}
+function vSLabel(){
+ return '<div class="pad"><div><h2 style="font-size:20px">Label Rekber Resmi untuk lapak Anda</h2><p class="mut">Satu tanda yang sama di marketplace, WhatsApp, dan media sosial membuat pembeli lebih yakin.</p></div>'
+ +'<div class="hero" style="align-items:flex-start">'+rr()+'<h1 style="font-size:19px">'+SELLER.name+'</h1><p>Lapak ini menerima pembayaran lewat Rekber Resmi. Dana Anda ditahan penyedia berizin sampai barang sampai. Cek legalitas penyedia di rekber.example/cek.</p></div>'
+ +'<div class="card"><h2>Salin untuk dipasang</h2><button class="btn teal block" data-act="copyLabel" type="button">'+ic('copy',18)+'Salin teks label</button><ul class="steps"><li>Tempel di bio Instagram atau TikTok.</li><li>Pasang di deskripsi toko marketplace.</li><li>Jadikan balasan otomatis WhatsApp Business.</li></ul></div></div>';
+}
+
+/* ===== Layar Mediator ===== */
+const caseNo=t=>'SNG-'+t.id.slice(4);
+function queueItems(){const t=S.tx,a=[];if(t&&disputeActive(t))a.push({k:'dispute',t:t});if(t&&t.appeal&&(t.appeal.status==='review'||t.appeal.status==='more')&&t.status!=='done')a.push({k:'appeal',t:t});return a;}
+function vMQueue(){
+ const items=queueItems(),t=S.tx;
+ let h='<div class="pad"><div class="row sp"><div><h2 style="font-size:20px">Antrian kasus</h2><p class="mut">Tenggat keputusan 7 hari kerja</p></div><span class="tag info">'+ic('scale',12)+'Mediator manusia</span></div>';
+ if(S.m.sel&&items.some(i=>i.k===S.m.sel))return vMCase(items.find(i=>i.k===S.m.sel));
+ if(!items.length)h+='<div class="card"><div class="empty"><span class="eb">'+ic('check',28)+'</span><h2>Antrian kosong</h2><p class="mut">Belum ada keberatan atau banding. Sengketa muncul di sini ketika pembeli menekan “Ada masalah”.</p><button class="btn primary" data-act="seedDispute" type="button">Muat sengketa contoh</button></div></div>';
+ else h+=items.map(i=>{const d=i.k==='dispute'?i.t.dispute.openedDay+7:i.t.appeal.day+7;return '<button class="q" data-act="mSel" data-v="'+i.k+'" type="button"><span class="grow"><div class="row sp"><b>'+caseNo(i.t)+'</b><span class="tag '+(i.k==='dispute'?'warn':'info')+'">'+(i.k==='dispute'?'Sengketa':'Banding penjual')+'</span></div><div class="mut">'+esc(i.t.item)+' · '+rp(i.t.price)+'</div><div class="tiny">'+(i.k==='dispute'?esc(i.t.dispute.reason)+' · ':'')+'Tenggat '+fshort(d)+' ('+Math.max(0,d-S.day)+' hari kerja lagi)</div></span>'+ic('chev',18)+'</button>';}).join('');
+ if(t&&t.dispute&&t.status==='done')h+='<div class="card flat"><h3>Terakhir diputuskan</h3><p class="mut">'+caseNo(t)+' · '+esc(t.item)+'<br><b>'+OUT[t.outcome].title+'</b></p></div>';
+ return h+'</div>';
+}
+function evCol(title,icn,a){return '<div class="card"><h3>'+ic(icn,15)+title+'</h3>'+fileList(a)+'</div>';}
+function vMCase(it){
+ const t=it.t,isD=it.k==='dispute',d=t.dispute,ap=t.appeal,ai=isD?aiDispute(t):aiAppeal(t),due=isD?d.openedDay+7:ap.day+7,rem=due-S.day;
+ const decide=isD
+  ?'<button class="btn teal block" data-act="decide" data-v="release" type="button">'+ic('check',18)+'Cairkan ke penjual</button><button class="btn primary block" data-act="decide" data-v="refund" type="button">'+ic('refresh',18)+'Kembalikan ke pembeli</button><button class="btn ghost block" data-act="decide" data-v="more" type="button"'+(d.extra?' disabled':'')+'>'+ic('upload',18)+(d.extra?'Bukti tambahan sudah diminta':'Minta bukti tambahan')+'</button>'
+  :'<button class="btn teal block" data-act="decide" data-v="release" type="button"'+(t.status!=='shipped'||t.resiFlag?' disabled':'')+'>'+ic('check',18)+'Cairkan ke penjual</button><button class="btn danger block" data-act="decide" data-v="reject" type="button">Tolak banding, dana tetap ditahan</button><button class="btn ghost block" data-act="decide" data-v="more" type="button"'+(ap.status==='more'?' disabled':'')+'>'+ic('upload',18)+'Minta bukti tambahan</button>';
+ return '<div class="pad">'+backBtn('mBack','Antrian')+'<div class="card"><div class="row sp"><div><h2>'+caseNo(t)+'</h2><div class="mut">'+esc(t.item)+' · dana ditahan '+rp(t.total)+'</div></div>'+ring(rem,7)+'</div><span class="tag '+(isD?'warn':'info')+'" style="width:fit-content">'+(isD?'Sengketa pembeli':'Banding penjual')+'</span>'
+ +(isD?'<p class="mut">Pembeli: <b>'+esc(d.reason)+'</b>'+(d.note?'. “'+esc(d.note)+'”':'')+'</p>':'<p class="mut">Penjual meminta penahanan ditinjau: <b>“'+esc(ap.reason)+'”</b></p>')+'<div class="tiny">Tenggat keputusan: '+fday(due)+'</div></div>'
+ +(isD?'<div class="ev2">'+evCol('Bukti pembeli','user',d.buyerFiles)+evCol('Bukti penjual','store',d.sellerFiles)+'</div>':'<div class="card"><h3>Data transaksi</h3><div class="pr"><span>Status</span><b>'+(t.status==='held'?'Dana ditahan':'Barang dikirim')+'</b></div><div class="pr"><span>Resi</span><b>'+(t.resi||'Belum ada')+'</b></div><div class="pr"><span>Sinyal AI</span><b>'+(t.signals.length?esc(t.signals.join(', ')):'Tidak ada')+'</b></div></div>')
+ +'<div class="ai"><div class="hd">'+ic('spark',16)+'Saran AI · hanya saran, bukan keputusan</div><div class="sug"><div class="row sp"><b>Saran awal: '+(isD?LBL[ai.sug]:{release:'Cairkan ke penjual',reject:'Tolak banding'}[ai.sug])+'</b><span class="tag info num">'+ai.conf+'%</span></div><div class="bar" role="img" aria-label="Tingkat keyakinan '+ai.conf+' persen"><i style="width:'+ai.conf+'%"></i></div><div class="tiny">Tingkat keyakinan model</div></div><ul>'+ai.rs.map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul>'+(ai.sig.length?'<div class="chips">'+ai.sig.map(s=>'<span class="tag warn">'+ic('flag',12)+esc(s)+'</span>').join('')+'</div>':'')+'<p class="tiny">AI mengelompokkan bukti menjadi saran awal. Keputusan akhir selalu ada pada mediator manusia. Audit bias berkala dilaporkan ke regulator.</p></div>'
+ +'<div class="card"><h2>Keputusan mediator</h2><div class="decide">'+decide+'</div></div></div>';
+}
+function vMGuide(){
+ return '<div class="pad"><div><h2 style="font-size:20px">Pedoman mediator</h2><p class="mut">Cara AI dan manusia berbagi tugas.</p></div>'
+ +'<div class="card"><ul class="rules"><li><span class="ico">'+ic('spark',17)+'</span><div><b>AI menyarankan</b>Mengelompokkan bukti, menandai sinyal, dan menyusun saran keputusan awal. Tidak pernah memutuskan atau memblokir sendiri.</div></li><li><span class="ico">'+ic('scale',17)+'</span><div><b>Manusia memutuskan</b>Tiga pilihan: cairkan ke penjual, kembalikan ke pembeli, atau minta bukti tambahan.</div></li><li><span class="ico">'+ic('clock',17)+'</span><div><b>Tenggat 7 hari kerja</b>Jika belum disepakati, pembeli dan penjual dapat mengadu ke Bank Indonesia.</div></li><li><span class="ico">'+ic('shield',17)+'</span><div><b>Audit bias berkala</b>Hasil audit dilaporkan ke regulator agar saran AI tidak merugikan kelompok tertentu.</div></li></ul></div></div>';
+}
+
+/* ===== Dasbor Pantauan ===== */
+const MQ=['Q1 ’26','Q2 ’26','Q3 ’26','Q4 ’26','Q1 ’27','Q2 ’27','Q3 ’27'];
+function lineChart(v,opt){
+ const W=300,H=130,L=34,R=10,T=12,B=22,mn=opt.min,mx=opt.max,x=i=>L+i*(W-L-R)/(v.length-1),y=n=>T+(1-(n-mn)/(mx-mn))*(H-T-B);
+ let g='',tk=[mn,(mn+mx)/2,mx];
+ tk.forEach(k=>{g+='<line class="ch-g" x1="'+L+'" x2="'+(W-R)+'" y1="'+y(k)+'" y2="'+y(k)+'"/><text class="ch-t" x="'+(L-4)+'" y="'+(y(k)+3)+'" text-anchor="end">'+opt.f(k)+'</text>';});
+ const pts=v.map((n,i)=>x(i)+','+y(n)).join(' ');
+ const area='M'+x(0)+','+y(mn)+' L'+pts.replace(/ /g,' L')+' L'+x(v.length-1)+','+y(mn)+'Z';
+ let ref='';if(opt.ref!=null)ref='<line class="ch-r" x1="'+L+'" x2="'+(W-R)+'" y1="'+y(opt.ref)+'" y2="'+y(opt.ref)+'"/><text class="ch-t" x="'+(W-R)+'" y="'+(y(opt.ref)-4)+'" text-anchor="end">'+opt.refl+'</text>';
+ const xl=opt.labels.map((l,i)=>i%2===0||i===v.length-1?'<text class="ch-t" x="'+x(i)+'" y="'+(H-6)+'" text-anchor="middle">'+l+'</text>':'').join('');
+ const e=v.length-1;
+ return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+opt.aria+'">'+g+ref+'<path class="ch-a" d="'+area+'" opacity=".7"/><polyline class="ch-l" points="'+pts+'"/>'+xl+'<circle class="ch-e" cx="'+x(e)+'" cy="'+y(v[e])+'" r="4.5"/></svg>';
+}
+function barChart(v,opt){
+ const W=300,H=130,L=34,R=10,T=12,B=22,mx=opt.max,n=v.length,bw=(W-L-R)/n,y=k=>T+(1-k/mx)*(H-T-B);
+ let g='';[0,mx/2,mx].forEach(k=>{g+='<line class="ch-g" x1="'+L+'" x2="'+(W-R)+'" y1="'+y(k)+'" y2="'+y(k)+'"/><text class="ch-t" x="'+(L-4)+'" y="'+(y(k)+3)+'" text-anchor="end">'+opt.f(k)+'</text>';});
+ const bars=v.map((k,i)=>'<rect class="'+(i===n-1?'ch-b2':'ch-b')+'" x="'+(L+i*bw+bw*.18)+'" y="'+y(k)+'" width="'+(bw*.64)+'" height="'+(y(0)-y(k))+'" rx="3"/><text class="ch-t" x="'+(L+i*bw+bw/2)+'" y="'+(H-6)+'" text-anchor="middle">'+opt.labels[i]+'</text>').join('');
+ return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+opt.aria+'">'+g+bars+'</svg>';
+}
+function vMon(){
+ const fraud=[1480,1620,1710,1590,1210,930,720],rec=[28,28,27,29,36,44,53],dis=[18,17,17,16,13,10,8],sell=[0,0,0,0,1200,3800,9400],app=[0,0,0,0,41,36,29];
+ const lb=MQ;
+ const kpi=(t,val,cap,ch)=>'<article class="card"><div class="hd"><h3>'+t+'</h3><span class="tag">Data simulasi</span></div><div class="val num">'+val+'</div><div class="cap">'+cap+'</div>'+ch+'</article>';
+ return '<div class="mon">'
+ +'<div class="span2 card" style="flex-direction:row;align-items:center;gap:12px;flex-wrap:wrap">'+rr()+'<div class="grow"><h2 style="font-size:18px">Dasbor Pantauan</h2><p class="mut">Untuk Bank Indonesia dan OJK. Lima indikator keberhasilan, proyeksi demo 2026–2027.</p></div><span class="tag warn">Data simulasi</span></div>'
+ +kpi('Laporan penipuan belanja daring','720 / kuartal','Turun dari 1.710 pada puncak Q3 ’26 (−58%).',barChart(fraud,{max:2000,f:k=>k.toLocaleString('id-ID'),labels:lb,aria:'Laporan penipuan belanja daring per kuartal, turun dari 1.710 menjadi 720'}))
+ +kpi('Dana korban yang kembali','53%','Acuan awal sekitar 28%. Garis putus-putus menandai acuan.',lineChart(rec,{min:0,max:60,f:k=>k+'%',ref:28,refl:'acuan 28%',labels:lb,aria:'Persentase dana korban yang kembali, naik dari 28% menjadi 53%'}))
+ +kpi('Rata-rata waktu penyelesaian sengketa','8 hari kerja','Turun dari 18 hari kerja. Target maksimum 7 hari kerja.',lineChart(dis,{min:0,max:20,f:k=>k,ref:7,refl:'target 7',labels:lb,aria:'Rata-rata hari kerja penyelesaian sengketa, turun dari 18 menjadi 8'}))
+ +kpi('Penjual UMKM yang bergabung','9.400','Sejak sandbox dibuka Q1 ’27.',barChart(sell,{max:10000,f:k=>k>=1000?(k/1000)+'rb':k,labels:lb,aria:'Penjual UMKM bergabung per kuartal, mencapai 9.400'}))
+ +'<article class="card span2"><div class="hd"><div><h3>Penahanan dibatalkan setelah banding</h3><div class="cap">Ukuran keadilan bagi penjual: makin rendah, makin sedikit penahanan yang keliru.</div></div><span class="tag">Data simulasi</span></div><div class="val num">29%</div>'+lineChart(app.slice(4),{min:0,max:50,f:k=>k+'%',labels:lb.slice(4),aria:'Persentase penahanan dibatalkan setelah banding, turun dari 41% menjadi 29%'})+'<div class="cap">Turun dari 41% di kuartal pertama. Setiap pembatalan ditinjau untuk audit bias, dan hasilnya dilaporkan berkala ke regulator.</div></article>'
+ +'<section class="span2"><h2 style="font-size:17px;margin:4px 0 10px">Peta jalan tiga tahap</h2><div class="road">'
+ +'<div class="card"><span class="ph">Tahap 1 · mulai 2027</span><h3>Standar dan izin</h3><p class="mut">Standar dan izin rekber di atas QRIS dan BI-FAST, diuji di sandbox bersama UMKM, marketplace, dan kurir.</p></div>'
+ +'<div class="card"><span class="ph">Tahap 2</span><h3>Eksperimen Rupiah Digital</h3><p class="mut">Use case eksperimen Rupiah Digital: dana tertahan bersyarat antarbank pada lapisan penyelesaian bank sentral.</p></div>'
+ +'<div class="card"><span class="ph">Tahap 3 · jadwal belum pasti</span><h3>Rupiah Digital ritel</h3><p class="mut">Dana ditahan di dompet pembeli. Jadwal belum pasti dan bergantung pada kesiapan Rupiah Digital ritel.</p></div></div></section>'
+ +'<div class="span2 card flat"><p class="mut">Prototipe konsep – bukan layanan resmi Bank Indonesia. Semua angka adalah simulasi.</p></div></div>';
+}
+
+/* ===== Kontrol Demo ===== */
+function renderDemo(){
+ const t=S.tx;
+ $('#demo').innerHTML='<h2>'+ic('spark',18)+'Kontrol Demo</h2><p class="mut">Panel untuk juri. Semua peran tersinkron.</p>'
+ +'<div class="clock"><div><div class="tiny">Hari kerja ke-'+S.day+'</div><b>'+fday(S.day)+'</b></div>'+(t?'<span class="tag '+(t.status==='done'?'good':'info')+'">'+({held:'Dana ditahan',shipped:'Barang dikirim',done:'Selesai'})[t.status]+'</span>':'<span class="tag">Belum ada transaksi</span>')+'</div>'
+ +'<h3>Skenario</h3><div class="scn" role="group" aria-label="Skenario">'+Object.keys(SCN).map(k=>'<button data-act="scn" data-v="'+k+'" aria-pressed="'+(S.scenario===k)+'" type="button"><b>'+k+') '+SCN[k][0]+'</b><small>'+SCN[k][1]+'</small></button>').join('')+'</div>'
+ +'<h3>Waktu</h3><div class="adv"><button class="btn accent sm" data-act="adv" data-v="1" type="button">Majukan 1 hari kerja</button><button class="btn accent sm" data-act="adv" data-v="3" type="button">Majukan 3 hari kerja</button></div>'
+ +'<h3>Pintasan</h3><div class="stack"><button class="btn ghost sm" data-act="skipPay" type="button">Lewati ke setelah bayar</button><button class="btn ghost sm" data-act="seedDispute" type="button">Muat sengketa contoh (mediator)</button><button class="btn ghost sm" data-act="startTour" type="button">Ulangi tur singkat</button><button class="btn danger sm" data-act="reset" type="button">'+ic('refresh',16)+'Reset demo</button></div>'
+ +'<div class="hint">'+({A:'Bayar, majukan 1 hari (penjual kirim), 2 hari (paket tiba), lalu tekan “Barang sudah sampai”.',B:'Bayar lalu majukan 3 hari kerja: penjual tidak mengirim, dana kembali ke pembeli.',C:'Bayar, majukan hingga paket tiba, lalu 3 hari kerja lagi tanpa respons: dana cair otomatis.',D:'Bayar, majukan sampai paket tiba, tekan “Ada masalah”, lalu putuskan di peran Mediator.'})[S.scenario]+'</div>';
+}
+
+/* ===== Render ===== */
+const ROLES=[['buyer','Pembeli','user'],['seller','Penjual','store'],['mediator','Mediator','scale'],['monitor','Pantauan','chart']];
+const TABS={
+ buyer:[['home','Beranda','home'],['status','Status','clock'],['about','Tentang','info']],
+ seller:[['dash','Dasbor','chart'],['create','Tagihan','plus'],['resi','Kirim','truck'],['label','Label','tag']],
+ mediator:[['queue','Antrian','list'],['guide','Pedoman','info']]
+};
+function badgeCount(r){
+ if(r==='mediator')return queueItems().length;
+ if(r==='seller'){const t=S.tx;return t&&t.status==='held'?1:0;}
+ return 0;
+}
+function curTab(){return S.role==='buyer'?(['problem','invoice','pay'].indexOf(S.b.screen)>-1?(S.b.screen==='problem'?'status':'home'):S.b.screen):S.role==='seller'?S.s.tab:S.m.tab;}
+function pickView(){
+ if(S.role==='buyer'){const s=S.b.screen;return s==='home'?vHome():s==='invoice'?vInvoice():s==='pay'?vPay():s==='status'?vStatus():s==='problem'?vProblem():vAbout();}
+ if(S.role==='seller'){const s=S.s.tab;return s==='dash'?vSDash():s==='create'?vSCreate():s==='resi'?vSResi():vSLabel();}
+ if(S.role==='mediator')return S.m.tab==='guide'?vMGuide():vMQueue();
+ return '';
+}
+function render(keepScroll){
+ const mon=S.role==='monitor';
+ $('#layout').dataset.mode=mon?'wide':'phone';
+ $('#roles').innerHTML=ROLES.map(r=>'<button data-act="role" data-v="'+r[0]+'" aria-pressed="'+(S.role===r[0])+'" type="button">'+ic(r[2],17)+r[1]+(r[0]!==S.role&&badgeCount(r[0])?'<span class="dot" aria-label="'+badgeCount(r[0])+' perlu perhatian">'+badgeCount(r[0])+'</span>':'')+'</button>').join('');
+ if(mon){$('#wide').innerHTML=vMon();}
+ else{
+  const sc=$('#screen'),key=S.role+'|'+curTab()+'|'+(S.b.screen)+'|'+S.m.sel+'|'+S.s.tab+'|'+S.b.payStage;
+  const top=sc.scrollTop,focusId=document.activeElement&&document.activeElement.id,selS=document.activeElement&&document.activeElement.selectionStart;
+  sc.innerHTML=pickView();
+  const changed=key!==lastKey;lastKey=key;
+  sc.classList.remove('enter');if(changed){void sc.offsetWidth;sc.classList.add('enter');sc.scrollTop=0;}else sc.scrollTop=top;
+  if(!changed&&focusId){const el=document.getElementById(focusId);if(el&&el!==document.activeElement){el.focus();try{if(selS!=null)el.setSelectionRange(selS,selS);}catch(e){}}}
+  $('#appbar').innerHTML='<div class="brand"><span class="logo" aria-hidden="true">'+ic('shield',17)+'</span><span>Rekber Resmi</span></div><span class="daychip">'+{buyer:'Pembeli',seller:'Penjual UMKM',mediator:'Mediator'}[S.role]+' · '+fshort(S.day).slice(5)+'</span>';
+  const tabs=TABS[S.role],ct=curTab();
+  $('#tabbar').innerHTML=tabs.map(t=>'<button data-act="tab" data-v="'+t[0]+'" '+(ct===t[0]?'aria-current="page"':'')+' type="button">'+ic(t[2],21)+t[1]+(S.role==='seller'&&t[0]==='resi'&&badgeCount('seller')?'<span class="dot">1</span>':'')+(S.role==='mediator'&&t[0]==='queue'&&badgeCount('mediator')?'<span class="dot">'+badgeCount('mediator')+'</span>':'')+'</button>').join('');
+ }
+ renderDemo();
+}
+
+/* ===== Tur ===== */
+const TOUR=[
+ {t:'Selamat datang',p:'Prototipe ini memperlihatkan alur Rekber Resmi dari sisi pembeli, penjual, mediator, dan pemantau.',sel:'#roles'},
+ {t:'Satu tanda, satu aturan',p:'Pembeli memasukkan kode tagihan dan membaca syarat pencairan sebelum membayar. Lencana “Rekber Resmi” muncul di semua layar.',sel:'#screen'},
+ {t:'Kontrol Demo',p:'Pilih skenario A sampai D, lalu majukan hari kerja untuk melihat dana cair, kembali, atau dimediasi secara otomatis.',sel:'#demo',mobile:'#fab'},
+ {t:'Manusia yang memutuskan',p:'AI hanya menyarankan. Di peran Mediator, keputusan akhir ada pada tiga tombol manusia.',sel:'#roles'}
+];
+function tourClear(){document.querySelectorAll('.tour-hl').forEach(e=>e.classList.remove('tour-hl'));}
+function renderTour(){
+ const el=$('#tour');tourClear();
+ if(!S.tour.on){el.hidden=true;el.innerHTML='';return;}
+ const s=TOUR[S.tour.i],narrow=window.innerWidth<900,tg=$(narrow&&s.mobile?s.mobile:s.sel);
+ if(tg)tg.classList.add('tour-hl');
+ const r=tg?tg.getBoundingClientRect():{top:80,bottom:120,left:16,width:300},tw=Math.min(300,window.innerWidth-32);
+ let top=r.bottom+14,left=Math.max(16,Math.min(window.innerWidth-tw-16,r.left));
+ if(top+190>window.innerHeight)top=Math.max(16,r.top-200);
+ if(r.height>window.innerHeight*.6){top=Math.max(16,window.innerHeight-240);}
+ el.hidden=false;
+ el.innerHTML='<div style="position:absolute;inset:0;background:rgba(3,10,20,.45)"></div><div class="tip" role="dialog" aria-label="Tur singkat" style="top:'+top+'px;left:'+left+'px"><div class="dots">'+TOUR.map((_,i)=>'<i class="'+(i===S.tour.i?'on':'')+'"></i>').join('')+'</div><h3>'+s.t+'</h3><p>'+s.p+'</p><div class="mrow"><button class="btn ghost sm" data-act="tourSkip" type="button">Lewati</button><button class="btn primary sm" data-act="tourNext" type="button">'+(S.tour.i===TOUR.length-1?'Selesai':'Lanjut')+'</button></div></div>';
+ const b=el.querySelector('.btn.primary');if(b)b.focus();
+}
+
+/* ===== Aksi ===== */
+function goto(role,tab){S.role=role;}
+function checkCode(){
+ const raw=String(S.f.code||'').trim().toUpperCase();
+ if(!raw){S.codeErr='Masukkan kode tagihan dari penjual.';render();return;}
+ const inv=S.invoices[raw];
+ if(!inv){S.codeErr='Kode “'+raw+'” tidak ditemukan. Periksa ulang atau minta penjual mengirim kode baru.';render();return;}
+ S.codeErr='';S.cur=inv;S.b.agree=false;S.b.loading=true;S.b.screen='invoice';render();
+ setTimeout(()=>{S.b.loading=false;if(S.b.screen==='invoice')render();},750);
+}
+function checkProv(){
+ const q=String(S.f.provider||'').trim();
+ if(!q){S.provRes={ok:false,q:'(kosong)'};render();return;}
+ const p=PROVIDERS.find(x=>x.n.toLowerCase()===q.toLowerCase());
+ S.provRes=p?{ok:true,name:p.n,no:p.no,q:q}:{ok:false,q:q};render();
+}
+function doScan(){
+ const l=$('#scanlayer');
+ l.innerHTML='<div class="scan" role="dialog" aria-label="Pindai kode QR"><div class="fr"></div><p>Arahkan kamera ke kode QR penjual</p><p class="tiny" style="color:#9fb0c6">Simulasi, kamera tidak digunakan</p><button class="btn ghost sm" data-act="scanClose" type="button">Batal</button></div>';
+ setTimeout(()=>{if(!l.firstChild)return;l.innerHTML='';S.f.code='RKB-7Q4M-2D9';S.codeErr='';render();toast('Kode terbaca: RKB-7Q4M-2D9','good');},1800);
+}
+function doDecide(v){
+ const it=queueItems().find(i=>i.k===S.m.sel);if(!it)return;const t=it.t;
+ if(it.k==='dispute'){
+  if(v==='more'){t.dispute.extra=true;t.dispute.extraAsked=S.day;ev('Mediator meminta bukti tambahan dari kedua pihak.','med');toast('Bukti tambahan diminta dari kedua pihak','info');render();return;}
+  ask({title:v==='release'?'Cairkan dana ke penjual?':'Kembalikan dana ke pembeli?',body:'<p class="mut">Keputusan ini final untuk transaksi '+t.id+' dan langsung terlihat di sisi pembeli dan penjual. Anda memutuskan sebagai mediator manusia, bukan AI.</p>',ok:v==='release'?'Ya, cairkan':'Ya, kembalikan',onOk:()=>{finish(v==='release'?'mediator_release':'mediator_refund');S.m.sel=null;render();}});
+ }else{
+  if(v==='more'){t.appeal.status='more';t.appeal.moreDay=S.day;ev('Mediator meminta bukti tambahan atas banding penjual.','med');toast('Bukti tambahan diminta dari penjual','info');render();return;}
+  if(v==='reject'){t.appeal.status='rejected';t.appeal.note='Resi atau sinyal risiko masih perlu diselesaikan.';ev('Banding ditolak mediator. Dana tetap ditahan sesuai syarat.','med');S.m.sel=null;toast('Banding ditolak','warn');render();return;}
+  ask({title:'Cairkan dana ke penjual?',body:'<p class="mut">Penahanan dinilai tidak terbukti, jadi dana dicairkan segera ke penjual.</p>',ok:'Ya, cairkan',onOk:()=>{t.appeal.status='accepted';finish('appeal_release');t.appeal.status='accepted';S.m.sel=null;render();}});
+ }
+}
+function act(a,el,e){
+ const v=el.dataset.v;
+ switch(a){
+ case 'role':S.role=v;render();break;
+ case 'tab':if(S.role==='buyer'){S.b.screen=v;}else if(S.role==='seller'){S.s.tab=v;}else{S.m.tab=v;S.m.sel=null;}render();break;
+ case 'sTab':S.s.tab=v;render();break;
+ case 'goHome':S.b.screen='home';render();break;
+ case 'goStatus':S.role='buyer';S.b.screen='status';render();break;
+ case 'toInvoice':S.b.screen='invoice';render();break;
+ case 'checkCode':checkCode();break;
+ case 'fillCode':S.f.code=v;S.codeErr='';render();break;
+ case 'scan':doScan();break;
+ case 'scanClose':$('#scanlayer').innerHTML='';break;
+ case 'fillProv':S.f.provider=v;checkProv();break;
+ case 'checkProv':checkProv();break;
+ case 'agree':S.b.agree=el.checked;render();break;
+ case 'toPay':if(!S.b.agree)return;S.b.screen='pay';S.b.payStage='choose';render();break;
+ case 'method':S.b.method=v;render();break;
+ case 'payNext':S.b.payStage='wait';S.b.payT=600;render();break;
+ case 'payBack':S.b.payStage='choose';render();break;
+ case 'copyAcc':copy('880012345678','Nomor rekening');break;
+ case 'simPay':S.b.payStage='processing';render();setTimeout(()=>{startTx();S.b.payStage='done';render();toast('Pembayaran berhasil. Dana ditahan.','good');},1500);break;
+ case 'received':ask({title:'Barang sudah sampai?',body:'<p class="mut">Dana '+rp(S.tx.price)+' langsung dicairkan ke penjual dan tidak bisa ditarik kembali. Tekan hanya jika barang sudah di tangan Anda dan sesuai.</p>',ok:'Ya, cairkan dana',onOk:()=>{finish('buyer_confirm');render();}});break;
+ case 'problem':S.b.reason='';S.b.files=[];S.b.err={};S.f.note='';S.b.screen='problem';render();break;
+ case 'reason':S.b.reason=v;S.b.err={};render();break;
+ case 'addfile':{const pool=['foto-kemasan-penyok.jpg','foto-kondisi-barang.jpg','video-unboxing.mp4','tangkapan-layar-chat.png'];const next=pool.find(x=>S.b.files.indexOf(x)<0);if(next){S.b.files.push(next);S.b.err={};}else toast('Maksimal 4 berkas pada prototipe ini','info');render();break;}
+ case 'rmfile':S.b.files.splice(+el.dataset.i,1);render();break;
+ case 'sendProblem':{const er={};if(!S.b.reason)er.reason='Pilih alasan keberatan terlebih dahulu.';if(!S.b.files.length)er.files='Unggah minimal satu foto atau video sebagai bukti.';S.b.err=er;if(Object.keys(er).length){render();return;}
+  ask({title:'Kirim keberatan ke mediator?',body:'<p class="mut">Dana tetap ditahan. Mediator manusia memutuskan dalam 7 hari kerja setelah mengkaji bukti Anda dan penjual.</p>',ok:'Kirim',onOk:()=>{openDispute(S.b.reason,S.f.note,S.b.files);S.b.screen='status';render();toast('Keberatan terkirim ke mediator','info');}});break;}
+ case 'extraBuyer':{const d=S.tx.dispute;d.extraBuyer=true;d.buyerFiles.push('foto-unboxing.jpg');ev('Pembeli menambahkan bukti: foto unboxing.','buyer');toast('Bukti tambahan terkirim','good');render();break;}
+ case 'rate':S.b.rate=+v;render();break;
+ case 'copyResi':copy(S.tx.resi,'Nomor resi');break;
+ case 'copyProof':copy(S.tx.proof,'Nomor bukti');break;
+ case 'newTx':S.past.push(S.tx);S.tx=null;S.cur=null;S.b=Object.assign(fresh().b);S.b.screen='home';S.provRes=null;render();break;
+ case 'appeal':{const t=S.tx;ask({title:'Ajukan banding penahanan',body:'<label class="lbl" for="ap-r">Alasan banding</label><textarea id="ap-r" class="inp" placeholder="Contoh: barang sudah dikirim dengan resi valid."></textarea><p class="tiny">Mediator manusia memutuskan dalam 7 hari kerja. Jika penahanan tidak terbukti, dana dicairkan segera.</p>',ok:'Ajukan banding',onOk:()=>{const r=($('#ap-r')||{}).value||'Penahanan perlu ditinjau ulang.';t.appeal={status:'review',day:S.day,reason:r.trim()};ev('Penjual mengajukan banding penahanan.','seller');toast('Banding diajukan ke mediator','info');render();}});break;}
+ case 'sellerEvidence':{const d=S.tx.dispute;if(d.extra&&!d.extraSeller){d.extraSeller=true;d.sellerFiles.push('tanda-terima-kurir.jpg');ev('Penjual menambahkan bukti: tanda terima kurir.','seller');}else{SELLER_FILES.forEach(f=>{if(d.sellerFiles.indexOf(f)<0)d.sellerFiles.push(f);});ev('Penjual mengunggah bukti sanggahan.','seller');}toast('Bukti terkirim ke mediator','good');render();break;}
+ case 'fillInv':{const x={1:['Dompet Kulit Handmade','275000','Warna cokelat tua, kirim 1 hari kerja.'],2:['Mesin Espresso Rumahan','2500000','Lengkap dengan portafilter.'],3:['Sepatu Kulit Pria','95000','Ukuran 42, stok terbatas.']}[v];S.f.pname=x[0];S.f.pprice=x[1];S.f.pnote=x[2];S.s.err={};render();break;}
+ case 'makeInv':{const er={},name=String(S.f.pname).trim(),price=parseInt(String(S.f.pprice).replace(/\D/g,''),10);
+  if(!name)er.name='Isi nama barang.';
+  if(!price||price<10000)er.price='Isi harga minimal Rp10.000, hanya angka.';
+  else if(price>MAX_PRICE)er.price='Nilai melebihi batas tahap awal ('+rp(MAX_PRICE)+'). Turunkan harga atau pecah menjadi beberapa tagihan.';
+  S.s.err=er;if(Object.keys(er).length){render();return;}
+  const code=genCode(),inv={code:code,item:name,price:price,art:/earphone|headphone/i.test(name)?'ear':/tas|dompet|batik/i.test(name)?'bag':'box',note:String(S.f.pnote||'').trim()};
+  S.invoices[code]=inv;S.s.created=inv;toast('Tagihan dibuat','good');render();break;}
+ case 'copyCode':copy(S.s.created.code,'Kode tagihan');break;
+ case 'copyLink':copy('https://rekber.example/bayar/'+S.s.created.code,'Tautan');break;
+ case 'copyWA':{const c=S.s.created;copy('Halo! Untuk '+c.item+' ('+rp(c.price)+') saya pakai Rekber Resmi, jadi dana Anda ditahan penyedia berizin sampai barang sampai. Cek syaratnya dan bayar di: https://rekber.example/bayar/'+c.code+' (kode '+c.code+')','Pesan WhatsApp');break;}
+ case 'asBuyer':S.f.code=S.s.created.code;S.role='buyer';S.b.screen='home';S.codeErr='';render();break;
+ case 'newInv':S.s.created=null;S.f.pname='';S.f.pprice='';S.f.pnote='';S.s.err={};render();break;
+ case 'fillResi':S.f.resi=v;S.s.err={};render();break;
+ case 'saveResi':{const r=String(S.f.resi).trim().toUpperCase();if(!/^[A-Z0-9]{8,16}$/.test(r)){S.s.err={resi:'Nomor resi harus 8 sampai 16 huruf atau angka, tanpa spasi.'};render();return;}S.s.err={};ship(r);S.f.resi='';S.s.tab='dash';render();break;}
+ case 'copyLabel':copy('✔ Rekber Resmi – '+SELLER.name+' menerima pembayaran lewat rekening bersama berizin. Dana Anda ditahan sampai barang sampai. Cek legalitas: rekber.example/cek','Teks label');break;
+ case 'mSel':S.m.sel=v;render();break;
+ case 'mBack':S.m.sel=null;render();break;
+ case 'decide':doDecide(v);break;
+ case 'seedDispute':seedDispute();render();toast('Sengketa contoh dimuat. Anda di peran Mediator.','info');break;
+ case 'scn':S.scenario=v;render();toast('Skenario '+v+': '+SCN[v][0],'info');break;
+ case 'adv':advance(+v);break;
+ case 'skipPay':{const keep={role:'buyer',scenario:S.scenario};reset(keep);quickPay();render();toast('Pembayaran disimulasikan. Dana ditahan.','good');break;}
+ case 'startTour':S.tour={on:true,i:0};renderTour();break;
+ case 'reset':reset({});S.tour.on=false;render();renderTour();toast('Demo direset','info');break;
+ case 'tourSkip':S.tour.on=false;renderTour();break;
+ case 'tourNext':if(S.tour.i>=TOUR.length-1){S.tour.on=false;}else S.tour.i++;renderTour();break;
+ case 'mclose':closeModal();break;
+ case 'mok':{const cb=modalCb;closeModal();if(cb)cb();break;}
+ }
+}
+/* appeal 'more' kembali ke antrian setelah satu hari kerja */
+const _adv=advance;
+advance=function(n){for(let i=0;i<n;i++){dayTick();const t=S.tx;if(t&&t.appeal&&t.appeal.status==='more'&&S.day>t.appeal.moreDay){t.appeal.status='review';ev('Penjual melengkapi bukti banding.','seller');}}render();toast('Maju '+n+' hari kerja → '+fshort(S.day),'info');};
+
+document.addEventListener('click',e=>{
+ const el=e.target.closest('[data-act]');if(!el||el.disabled)return;
+ if(el.type==='checkbox'){act(el.dataset.act,el,e);return;}
+ e.preventDefault();act(el.dataset.act,el,e);
+});
+document.addEventListener('input',e=>{const b=e.target.dataset&&e.target.dataset.bind;if(b){S.f[b]=e.target.value;if(b==='code')S.codeErr='';}});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Enter'&&e.target.dataset&&e.target.dataset.enter&&e.target.tagName==='INPUT'){e.preventDefault();act(e.target.dataset.enter,e.target,e);}
+ if(e.key==='Escape'){if(!$('#modal').hidden)closeModal();else if(S.tour.on){S.tour.on=false;renderTour();}else if($('#demo').classList.contains('open'))toggleDemo(false);}
+});
+function toggleDemo(on){const d=$('#demo'),s=$('#scrim'),f=$('#fab');d.classList.toggle('open',on);s.hidden=!on;s.className=on?'scrim':'';f.setAttribute('aria-expanded',on?'true':'false');}
+$('#fab').addEventListener('click',()=>toggleDemo(!$('#demo').classList.contains('open')));
+$('#scrim').addEventListener('click',()=>toggleDemo(false));
+window.addEventListener('resize',()=>{if(S.tour.on)renderTour();});
+setInterval(()=>{if(S.role==='buyer'&&S.b.screen==='pay'&&S.b.payStage==='wait'){S.b.payT=Math.max(0,S.b.payT-1);const t=$('#tmr');if(t)t.textContent=mmss(S.b.payT);}},1000);
+
+/* ===== Mulai ===== */
+render();
+setTimeout(renderTour,300);
+})();
+</script>
+
+</body></html>

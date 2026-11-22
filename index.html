@@ -886,7 +886,7 @@ function doDecide(v){
   if(v==='more'){t.appeal.status='more';t.appeal.moreDay=S.day;ev('Mediator meminta bukti tambahan atas banding penjual.','med');toast('Bukti tambahan diminta dari penjual','info');render();return;}
   if(v==='reject'){t.appeal.status='rejected';t.appeal.note='Resi atau sinyal risiko masih perlu diselesaikan.';ev('Banding ditolak mediator. Dana tetap ditahan sesuai syarat.','med');S.m.sel=null;toast('Banding ditolak','warn');render();return;}
   ask({title:'Cairkan dana ke penjual?',body:'<p class="mut">Penahanan dinilai tidak terbukti, jadi dana dicairkan segera ke penjual.</p>',ok:'Ya, cairkan',onOk:()=>{t.appeal.status='accepted';finish('appeal_release');t.appeal.status='accepted';S.m.sel=null;render();}});
- }
+ } 
 }
 function act(a,el,e){
  const v=el.dataset.v;
